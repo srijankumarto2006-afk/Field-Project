@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zomato Login Popup</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- PAGE CONTENT (background) -->
+<div class="page">
+    <button class="open-btn" onclick="openLogin()">Open Login</button>
+</div>
+
+
+<!-- DARK OVERLAY -->
+<div class="overlay" id="overlay">
+
+    <!-- LOGIN MODAL -->
+    <div class="login-box">
+
+        <div class="login-header">
+            <h2>Login</h2>
+            <span class="close" onclick="closeLogin()">✕</span>
+        </div>
+
+        <div class="phone-input">
+            <span class="code">🇮🇳 +91</span>
+            <input type="text" placeholder="Phone">
+        </div>
+
+        <button class="otp-btn">Send One Time Password</button>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <button class="email-btn">
+            Continue with Email
+        </button>
+
+        <button class="google-btn">
+            Sign in as Srijan
+        </button>
+
+        <p class="signup">
+            New to Zomato? <span>Create account</span>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

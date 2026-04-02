@@ -1,0 +1,142 @@
+body{
+font-family: Arial;
+margin:0;
+}
+
+/* PAGE */
+
+.page{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* OPEN BUTTON */
+
+.open-btn{
+padding:12px 20px;
+font-size:16px;
+}
+
+/* DARK BACKGROUND */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.65);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+visibility:hidden;
+}
+
+/* LOGIN BOX */
+
+.login-box{
+width:400px;
+background:white;
+padding:25px;
+border-radius:8px;
+}
+
+/* HEADER */
+
+.login-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.close{
+cursor:pointer;
+font-size:20px;
+}
+
+/* PHONE INPUT */
+
+.phone-input{
+display:flex;
+border:1px solid #ddd;
+border-radius:6px;
+padding:10px;
+margin-bottom:15px;
+}
+
+.phone-input input{
+border:none;
+outline:none;
+flex:1;
+margin-left:10px;
+}
+
+/* OTP BUTTON */
+
+.otp-btn{
+width:100%;
+background:#ef4f5f;
+color:white;
+border:none;
+padding:12px;
+border-radius:6px;
+font-size:16px;
+margin-bottom:15px;
+cursor:pointer;
+}
+
+/* DIVIDER */
+
+.divider{
+text-align:center;
+margin:10px 0;
+color:#777;
+}
+
+/* EMAIL BUTTON */
+
+.email-btn{
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+background:white;
+border-radius:6px;
+margin-bottom:10px;
+cursor:pointer;
+}
+
+/* GOOGLE BUTTON */
+
+.google-btn{
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+background:white;
+border-radius:6px;
+margin-bottom:15px;
+cursor:pointer;
+}
+
+/* SIGNUP */
+
+.signup{
+text-align:center;
+font-size:14px;
+}
+
+.signup span{
+color:#ef4f5f;
+cursor:pointer;
+}
+
+/* SHOW MODAL */
+
+.overlay.show{
+visibility:visible;
+}

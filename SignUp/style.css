@@ -1,0 +1,130 @@
+body{
+font-family: Arial;
+margin:0;
+}
+
+/* DARK BACKGROUND */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.65);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+visibility:hidden;
+}
+
+/* POPUP BOX */
+
+.signup-box{
+width:420px;
+background:white;
+padding:30px;
+border-radius:8px;
+}
+
+/* HEADER */
+
+.signup-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.close{
+cursor:pointer;
+font-size:20px;
+}
+
+/* INPUTS */
+
+.input-box{
+width:100%;
+padding:16px;
+margin-bottom:22px;
+border:1px solid #ddd;
+border-radius:6px;
+font-size:17px;
+height:48px;
+box-sizing:border-box;
+}
+
+/* TERMS */
+
+.terms{
+display:flex;
+align-items:flex-start;
+font-size:13px;
+margin-bottom:15px;
+}
+.check{
+    margin-top:14px;
+}
+.terms input{
+margin-right:8px;
+}
+
+.terms span{
+color:#ef4f5f;
+}
+
+/* CREATE BUTTON */
+
+.create-btn{
+width:100%;
+padding:12px;
+border:none;
+background:#dcdcdc;
+color:white;
+border-radius:6px;
+font-size:16px;
+margin-bottom:15px;
+}
+
+/* DIVIDER */
+
+.divider{
+text-align:center;
+margin:10px 0;
+color:#777;
+}
+
+/* GOOGLE BUTTON */
+
+.google-btn{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+background:white;
+border-radius:6px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+}
+
+/* LOGIN TEXT */
+
+.login-text{
+margin-top:15px;
+text-align:center;
+}
+
+.login-text span{
+color:#ef4f5f;
+cursor:pointer;
+}
+
+/* SHOW POPUP */
+
+.overlay.show{
+visibility:visible;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Orient Pearl</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<section class="first">
+
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="./view.mp4" type="video/mp4">
+    </video>
+
+    <!-- Dark Overlay -->
+    <div class="overlay"></div>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="./logo.png" alt="Orient">
+            
+        </div>
+
+        <a href="../DiningOut/index.html" class="btn">BOOK A TABLE</a>
+    </header>
+</section>
+
+  <section class="hero-container">
+        <div class="content-side">
+            <div class="text-wrapper">
+                <h1 class="title">HOTEL ORIENT PEARL: LUXURY MULTI-CUISINE & PREMIUM STAY</h1>
+                
+                <p class="desc"> 
+                    At Hotel Orient Pearl, luxury meets taste in a seamless blend of world-class hospitality and global culinary excellence. Experience a destination where every detail is crafted to elevate your stay.
+                 <br> <br>
+                    Enhance your experience with our expertly crafted cocktails, perfect for unwinding as you soak in the serene beach views.
+                <br><br>
+                    At Hotel Orient Pearl, every moment is a celebration of flavor, culture, and the natural beauty of India. Join us for an exquisite culinary journey.
+                </p>
+            </div>
+        </div>
+
+        <div class="sidevideo">
+            <video autoplay muted loop playsinline class="bg-video">
+                <source src="./video-for-home.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <section class="ambiance-gallery">
+    <h2 class="gallery-title">EXPERIENCE THE BEACHSIDE AMBIANCE AT HOTEL ORIENT PEARL</h2>
+
+    <div class="gallery-grid">
+        <!-- Outdoor Column -->
+        <div class="gallery-item">
+            <div class="slider-container">
+                <button class="arrow prev" onclick="moveSlider(this, -1)">&#10094;</button>
+                <div class="slider-window">
+                    <img src="./out3.jpeg" alt="Outdoor Seating" class="active">
+                </div>
+                <button class="arrow next" onclick="moveSlider(this, 1)">&#10095;</button>
+            </div>
+            <p class="caption">Outdoor</p>
+        </div>
+
+        <!-- Indoor Column -->
+        <div class="gallery-item">
+            <div class="slider-container">
+                <button class="arrow prev" onclick="moveSlider(this, -1)">&#10094;</button>
+                <div class="slider-window">
+                    <img src="./in1.jpeg" alt="Indoor Seating" class="active">
+                </div>
+                <button class="arrow next" onclick="moveSlider(this, 1)">&#10095;</button>
+            </div>
+            <p class="caption">Indoor</p>
+        </div>
+
+        <!-- Bar Column -->
+        <div class="gallery-item">
+            <div class="slider-container">
+                <button class="arrow prev" onclick="moveSlider(this, -1)">&#10094;</button>
+                <div class="slider-window">
+                    <img src="./bar2.jpeg" alt="Bar Area" class="active">
+                </div>
+                <button class="arrow next" onclick="moveSlider(this, 1)">&#10095;</button>
+            </div>
+            <p class="caption">Bar</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero-container">
+        
+
+        <div class="sidevideo">
+            <img src="./enjoy.avif" alt="atbeach" class="bg-video">
+            
+        </div>
+
+        <div class="content-side">
+            <div class="text-wrapper">
+                <h1 class="title">Hotel Menu: A Celebration of Global Flavors</h1>
+                
+                <p class="desc"> 
+                   At Hotel Orient Pearl, we invite you to embark on a culinary journey where tradition meets contemporary elegance. Our menu is thoughtfully curated to bring together the finest flavors from across the world, crafted with passion and precision.
+                 <br> <br>
+                   Savor the warmth of classic favorites, explore vibrant international cuisines, and experience a perfect balance of taste, texture, and presentation. Whether you crave something comforting or adventurous, our menu offers a diverse selection to satisfy every palate.
+                <br><br>
+                    At Hotel Orient Pearl, dining is more than a meal—it’s an experience of flavor, artistry, and unforgettable moments.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+<section class="celebration-section">
+    <h2 class="section-heading">Your ultimate celebration journey begins here...</h2>
+
+    <div class="card-grid">
+        <div class="polaroid-card">
+            <div class="card-image-wrapper">
+                <img src="./kebab.png" alt="Get a Platter">
+                
+            </div>
+            <div class="card-caption">
+                <p class="color">Try a free taste of our kebabs.<br>If you love it, get a platter</p>
+            </div>
+        </div>
+
+        <div class="polaroid-card">
+            <div class="card-image-wrapper">
+                <img src="./candle.png" alt="Candlelight">
+                
+            </div>
+            <div class="card-caption">
+                <p class="color">Candle light celebration awaits.<br>Make it magical</p>
+            </div>
+        </div>
+
+        <div class="polaroid-card">
+            <div class="card-image-wrapper">
+                <img src="./fun.png" alt="Moments">
+                
+            </div>
+            <div class="card-caption">
+                <p class="color">Moments to Remember</p>
+            </div>
+        </div>
+    </div>
+    
+    <p class="footer-text">We provide premium catering for events such as birthdays, anniversaries, staff parties, and corporate functions.
+We also offer romantic candlelight dinners.</p>
+
+</section>
+
+<section class="hero-container">
+        
+
+        <div class="sidevideo">
+            <video autoplay muted loop playsinline class="bg-video">
+                <source src="./dining-experience.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="content-side">
+            <div class="text-wrapper">
+                <h1 class="title">Relaxing Beachside Dining Experience</h1>
+                
+                <p class="desc"> 
+                   Hotel Orient Pearl redefines beachfront dining , offering a unique fusion of Turkish and Indian cuisines with a Tulum-inspired vibe. Enjoy breathtaking beach views, warm ambience, and exceptional service with a smile.
+                 <br> <br>
+                    Enhance your experience with our expertly crafted cocktails, perfect for unwinding as you soak in the serene beach views.
+                <br><br>
+                    Indulge in a culinary journey where every detail is designed to delight—from the mood lighting and soothing music to the cozy seating and private dining options.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+<script src="script.js"></script>
+</body>
+</html>

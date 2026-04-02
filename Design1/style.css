@@ -1,0 +1,73 @@
+ body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #062c12; /* Deep forest green */
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 99px;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at center, #0a4d1d 0%, #062c12 100%);
+        }
+
+        .floating-leaf {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .btn-shine:hover::after {
+            left: 100%;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .food-shadow {
+            filter: drop-shadow(0 25px 25px rgba(0,0,0,0.5));
+        }
+
+        /* Video Play Button Styling */
+        .play-btn-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+        }

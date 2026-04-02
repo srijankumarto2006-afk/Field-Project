@@ -1,0 +1,451 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.img{
+    height: 248px;
+    width: 318px;
+    border-radius: 20px;
+}
+.hotelname,.rate,.type,.price{
+    display: inline-block;
+}
+.restaurant{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.rate{
+    color: white;
+    background-color: green;
+    border-radius: 7px;
+    padding: 4px;
+    width: 39px;
+    height: 25px;
+    align-items: center;
+    position: absolute;
+    right: 5px;
+    font-size: 14px;
+}
+.hotelname{
+    font-size: large;
+    font-weight: bold;
+}
+body{
+    background-color:white;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+.pura{
+    width:100vw;
+    background-color: white;
+}
+.xx{
+    width:100vw;
+    background-color: #F8F8F8;
+    
+}
+
+.walkin{
+height:5px;
+}
+.time{
+    position:absolute;
+    right: 5px;
+    bottom: 1px;
+}
+.price{
+    position: absolute;
+    right: 5px;
+}
+.type,.price,.time{
+    font-size: 15px;
+    color: grey;
+   
+}
+.card{
+    display: inline-block;
+    position: relative;
+    border:9px solid white;
+    border-radius: 15px;
+    cursor: pointer;
+    align-items: center;
+    margin:17px;
+    margin-top:20px;
+
+    
+    transition: all 0.1s ease;
+
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08);
+}
+
+.card:hover{
+    background-color: white;
+    border-color: white;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.18);
+
+}
+.min{
+    display:inline-block;
+}
+.off{
+    background-color: #256FEF;
+
+    color: white;
+    display: inline-block;
+    width: 101px;
+    position: absolute;
+    bottom: 95px;
+    padding-top: 3px;
+    padding-bottom: 19px;
+     padding-left: 4px;
+    height:18px;
+    font-size: 15px;
+
+}
+.ruppes{
+    background-color: #256FEF;
+
+    color: white;
+    display: inline-block;
+    width: 72px;
+    position: absolute;
+    bottom: 95px;
+    padding-top: 3px;
+    padding-bottom: 19px;
+     padding-left: 4px;
+    height:18px;
+    font-size: 15px;
+}
+.image{
+    position:relative;
+}
+.Box{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.pic{
+    height:90px;
+    width:310px;
+   margin-right:1rem;
+    margin-top:6px;
+    cursor: pointer;
+    
+}
+.searching{
+    width:45rem;
+    height:45px;
+    position:relative;
+    bottom:15px;
+    margin-top:25px;
+    border-top-color: grey;
+    border-radius: 7px;
+     text-align: center;
+     margin-left: -40px;
+     margin-right: -89px;
+}
+.btn{
+     margin-top:8px;
+     margin-right:90px;
+}
+.login{
+    margin-top:8px;
+     margin-right: -30px;
+  
+
+    
+}
+.button{
+    position:relative;
+   height:50px;
+   bottom:15px;
+   width:80px;
+   border:none;
+   cursor: pointer;
+   font-size:17px;
+   background-color: white;
+   color:grey;
+    margin-top:22px;
+    margin-right:22px;
+
+}
+.head{
+    background-color: white;
+    
+}
+.pehla,.dusra,.tisra{
+    display:flex;
+    justify-content: center;
+    margin-left: 17.5vw;
+   margin-right:30px;
+    width:177px;
+    margin-bottom: -5px;
+    padding-left: 15px;
+    cursor: pointer;
+}
+.rang{
+    color:red;
+    text-decoration: none;
+}
+.fork,.gaddi,.nighticon{
+    height:28px;
+    width:30px;
+    margin-top:17px;
+    margin-left:16px;
+    
+}
+.dusra{
+ border-bottom: 3px solid red;
+}
+.plate,.scooter,.nigh{
+    border-radius:50%;
+    background-color:rgb(209, 237, 245);
+    width:60px;
+    height:60px;
+    margin-bottom:15px;
+}
+.scooter{
+    margin-left: 3px;
+}
+.dusra{
+    margin-left:43px;
+}
+.tisra{
+    margin-left:43px;
+}
+.dining,.Deli,.Nightl{
+    font:16px  Helvetica,sans-serif;
+    color:#EF4F5F;
+    position:relative;
+    bottom:9px;
+    left:5px;
+}
+.first{
+    margin-bottom:5px;
+     display: flex;
+     justify-content: space-around;
+}
+.second{
+    padding-bottom:6px;
+    position: sticky;
+    top:0px;
+    background-color: white;
+    z-index: 8;
+    
+}
+
+.Box{
+    display:inline-block;
+     
+}
+.pictures{
+    display:flex;
+    justify-content: space-around;
+    overflow-x: scroll;
+}
+.img1{
+    height:350px;
+    width:280px;
+    margin-right:15px;
+    border-radius:9px;
+    margin-left:16px;
+    
+}
+
+.famous{
+    
+    background-color: #F8F8F8;
+    padding:15px 0px;
+    overflow-x:scroll;
+    scroll-behavior: smooth;
+    gap:30px;
+    position: relative;
+    width: 100%;
+    margin: auto;
+     
+}
+
+
+
+.know{
+    margin-top:20px;
+    margin-bottom:10px;
+    margin-left:16px;
+    font:17px Okra,Helvetica,sans-serif;
+}
+.c1{
+    font:22px Okra,Helvetica,sans-serif;
+    margin-left:18px;
+   
+  
+}
+
+.trend{
+    margin-left:16px;
+    position:absolute;
+    bottom: 50px;
+    color: white;
+    background-color: rgba(65, 64, 64, 0.2);
+    z-index:5;
+    width: 178px;
+    position:sticky;
+    padding-left: 5px;
+}
+
+
+.project{
+    margin-left: 3vw;
+     margin-right: 3vw;
+}
+
+.c1>h1{
+
+margin-left:2px;
+font:Okra,Helvetica,sans-serif;
+font-size: 33px;
+color:#393838;
+}
+.dishes{
+    display:flex;
+    justify-content:space-around;
+    padding:1rem;
+    
+
+}
+.food{
+    height:190px;
+    width:190px;
+    margin:1.3rem;
+    border-radius: 50%;
+    background-color:white;
+}
+
+.order{
+    background-color: #F8F8F8;
+    padding:40px 0px;
+    overflow-x:scroll;
+    scroll-behavior: smooth;
+    gap:30px;
+    position: relative;
+    width: 100%;
+    margin: auto;
+}
+.order1{
+    background-color:white;
+    padding:40px 0px;
+    overflow-x:scroll;
+    scroll-behavior: smooth;
+    gap:30px;
+    position: relative;
+    width: 100%;
+    margin: auto;
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.para>h6{
+    
+    font-family: 'Roboto',Arial, Helvetica, sans-serif;
+    font-size:20px;
+    color:#4a4949;
+    padding:0px 8px 0px 0px;
+    margin-left:85px;
+}
+
+.receipe{
+    margin:0.5rem;
+}
+.dosa>h6,.pijja>h6,.roll>h6,.cake>h6{
+    margin-left:90px;
+}
+.pijja{
+    position:relative;
+     margin-left:20px;
+}
+
+.north>h6,.fried>h6{
+    margin-left: 67px;
+}
+
+
+.dishes{
+    display:flex;
+    justify-content:space-around;
+    padding:1rem;
+    
+
+}
+.food{
+    height:155px;
+    width:155px;
+    margin:1.3rem;
+    border-radius: 50%;
+}
+.samosa{
+   background-color: white;
+}
+.order{
+    background-color: #F8F8F8;
+    padding:40px 0px;
+    overflow-x:scroll;
+    scroll-behavior: smooth;
+    gap:30px;
+    position: relative;
+    width: 100%;
+    margin: auto;
+}
+.band{
+background-color: white;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.para>h6{
+    
+    font-family: 'Roboto',Arial, Helvetica, sans-serif;
+    font-size:20px;
+    color:#4a4949;
+    padding:0px 8px 0px 0px;
+    margin-left:55px;
+}
+.kami{
+    margin-left:1.5rem;
+}
+.grr{
+    margin-left:0.7rem;
+}
+.ind{
+    margin-right:0.9rem;
+}
+.receipe{
+    margin:0.5rem;
+}
+.pizza{
+   background-color: rgba(239, 9, 9, 0.93);
+}
+.burger{
+     background-color:khaki;
+}
+.kfc{
+    margin-left:18px;
+}
+.bur{
+     margin-left:25px;
+
+}
+.header{
+    width:100%;
+    border-bottom:1px solid #e5e5e5;
+   
+}
+.project{
+    margin-left: 13vw;
+     margin-right: 13vw;
+}
+
+

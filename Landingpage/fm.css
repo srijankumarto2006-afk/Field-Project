@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.hero-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Left Side Styling */
+.content-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5% 8%;
+    background-color: #fff;
+}
+
+.text-wrapper {
+    max-width: 500px;
+}
+
+.title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.description {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+/* Right Side Styling */
+.sidevideo {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay Buttons & Icons */
+.video-overlay-top {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-icon img {
+    width: 35px;
+    height: 35px;
+    filter: brightness(0) invert(1); /* Makes icon white if needed */
+}
+
+.book-btn {
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.book-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.side-icons {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.icon-item {
+    background: rgba(212, 175, 55, 0.8); /* Gold-ish color from image */
+    color: #fff;
+    padding: 8px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
