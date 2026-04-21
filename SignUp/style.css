@@ -5,7 +5,7 @@ margin:0;
 
 /* DARK BACKGROUND */
 
-.overlay{
+.overlaysign{
 position:fixed;
 top:0;
 left:0;
@@ -125,6 +125,6 @@ cursor:pointer;
 
 /* SHOW POPUP */
 
-.overlay.show{
+.overlaysign.show{
 visibility:visible;
 }

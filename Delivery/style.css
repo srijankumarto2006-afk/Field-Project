@@ -447,5 +447,25 @@ body {
     margin-left: 13vw;
      margin-right: 13vw;
 }
+.slider{
+    overflow: hidden;
+}
+.slide-track {
+    will-change: transform;
+    display: flex;
+    width: max-content; /* double items */
+    animation: scroll 20s linear infinite;
+}
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+.slider:hover .slide-track {
+    animation-play-state: paused;
+}
 
 

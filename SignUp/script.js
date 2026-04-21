@@ -1,8 +1,8 @@
 
 function openSignup(){
-document.getElementById("overlay").classList.add("show");
+document.getElementById("over").classList.add("show");
 }
 
 function closeSignup(){
-document.getElementById("overlay").classList.remove("show");
-}3
+document.getElementById("over").classList.remove("show");
+}

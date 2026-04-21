@@ -394,11 +394,118 @@ body {
    
 }
 
-.footer-text {
+.foot-text {
     margin-top: 60px;
     font-size: 1rem;
-    color: #000000;
+    color: rgb(0, 0, 0);
 }
 .color{
     color:#000000
+}
+.footer {
+     background-color:#000000;
+    padding: 40px 80px;
+}
+
+/* TOP BAR */
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color:white;
+}
+
+/* DROPDOWNS */
+.dropdown {
+    display: flex;
+    gap: 10px;
+}
+
+.select-box {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    background: #fff;
+}
+
+/* GRID */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    color:white;
+    margin-top: 30px;
+}
+
+/* HEADINGS */
+.footer h3 {
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* LINKS */
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+    color: #6f6f6f;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.footer ul li:hover {
+    color: #ef4f5f;
+}
+
+/* SOCIAL ICONS */
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+/* APP BUTTONS */
+.app-buttons img {
+    width: 140px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* LINE */
+.footer hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* BOTTOM TEXT */
+.footer-bottom {
+    font-size: 13px;
+    color: #6f6f6f;
+    line-height: 1.6;
 }

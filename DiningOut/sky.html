@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collections Slider</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f8f8f8;
+}
+
+/* SECTION */
+.section {
+    width: 80%;
+    margin: 40px auto;
+}
+
+/* TITLE */
+.title {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: gray;
+    margin: 10px 0 20px;
+}
+
+/* SLIDER WRAPPER */
+.slider-wrapper {
+    position: relative;
+}
+
+/* SLIDER */
+.slider {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* CARD */
+.card {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.card img {
+    width: 250px;
+    height: 320px;
+    border-radius: 10px;
+}
+
+/* OVERLAY */
+.card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+/* TEXT */
+.text {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: white;
+    z-index: 2;
+}
+
+/* BUTTONS */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: black;
+    color: white;
+    border: none;
+    font-size: 22px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.scroll-btn:hover {
+    opacity: 1;
+}
+
+.left {
+    left: -15px;
+}
+
+.right {
+    right: -15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="section">
+
+    <div class="title">Collections</div>
+    <div class="subtitle">
+        Explore curated lists of top restaurants, cafes, pubs, and bars.
+    </div>
+
+    <div class="slider-wrapper">
+
+        <!-- LEFT BUTTON -->
+        <button class="scroll-btn left" onclick="moveLeft()">❮</button>
+
+        <!-- SLIDER -->
+        <div class="slider" id="slider">
+
+            <div class="card">
+                <img src="https://picsum.photos/id/1011/300/400">
+                <div class="text">Top Trending Spots</div>
+            </div>
+
+            <div class="card">
+                <img src="https://picsum.photos/id/1015/300/400">
+                <div class="text">Romantic Dining</div>
+            </div>
+
+            <div class="card">
+                <img src="https://picsum.photos/id/1016/300/400">
+                <div class="text">Best Pubs</div>
+            </div>
+
+            <div class="card">
+                <img src="https://picsum.photos/id/1020/300/400">
+                <div class="text">Party Places</div>
+            </div>
+
+            <div class="card">
+                <img src="https://picsum.photos/id/1024/300/400">
+                <div class="text">New in Town</div>
+            </div>
+
+            <div class="card">
+                <img src="https://picsum.photos/id/1025/300/400">
+                <div class="text">Luxury Dining</div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT BUTTON -->
+        <button class="scroll-btn right" onclick="moveRight()">❯</button>
+
+    </div>
+
+</div>
+
+<script>
+const slider = document.getElementById("slider");
+
+// ✅ FIXED FUNCTIONS (no naming conflict)
+function moveLeft() {
+    slider.scrollBy({
+        left: -300,
+        behavior: "smooth"
+    });
+}
+
+function moveRight() {
+    slider.scrollBy({
+        left: 300,
+        behavior: "smooth"
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Scroll Food</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f8f8f8;
+}
+
+/* SECTION */
+.section {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* WRAPPER */
+.slider {
+    overflow: hidden;
+    position: relative;
+}
+
+/* TRACK (MOVES) */
+.slide-track {
+    display: flex;
+    width: calc(200px * 12); /* double items */
+    animation: scroll 20s linear infinite;
+}
+
+/* CARD */
+.slide {
+    width: 200px;
+    text-align: center;
+}
+
+.slide img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+/* TEXT */
+.slide p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* ANIMATION */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="section">
+    <div class="title">Inspiration for your first order</div>
+
+    <div class="slider">
+        <div class="slide-track">
+
+            <!-- ORIGINAL ITEMS -->
+            <div class="slide">
+                <img src="https://picsum.photos/id/1080/200/200">
+                <p>Biryani</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/292/200/200">
+                <p>Burger</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/1084/200/200">
+                <p>Chicken</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/1081/200/200">
+                <p>Pizza</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/1060/200/200">
+                <p>Ice Cream</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/292/200/200">
+                <p>Fries</p>
+            </div>
+
+            <!-- DUPLICATE (IMPORTANT FOR LOOP 🔥) -->
+            <div class="slide">
+                <img src="https://picsum.photos/id/1080/200/200">
+                <p>Biryani</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/292/200/200">
+                <p>Burger</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/1084/200/200">
+                <p>Chicken</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/1081/200/200">
+                <p>Pizza</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/1060/200/200">
+                <p>Ice Cream</p>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/id/292/200/200">
+                <p>Fries</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
