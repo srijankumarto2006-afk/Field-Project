@@ -13,10 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="g_id_onload"
-     data-client_id="1004628707373-ohhjad7s8guhdr4bprbrdn959dq23gh5.apps.googleusercontent.com"
-     data-callback="handleCredentialResponse">
-</div>
+    
     <header class="header">
         <div class="pura">
         
@@ -1113,6 +1110,7 @@
 
 <script src="script.js"></script>
 
+
 <script>
 window.onload = function () {
     google.accounts.id.initialize({
@@ -1122,28 +1120,20 @@ window.onload = function () {
 };
 
 function googleLogin() {
-    google.accounts.id.prompt(); // ONLY this
+    google.accounts.id.prompt();
 }
 
 function handleCredentialResponse(response) {
     console.log("TOKEN:", response.credential);
 
-    fetch("http://localhost:3000/auth/google", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ token: response.credential })
-    })
+    fetch("https://YOUR-REAL-BACKEND.onrender.com/auth/google")
     .then(res => res.json())
     .then(data => {
-        console.log(data);
         alert("Login Successful: " + data.user.name);
     })
     .catch(err => console.log(err));
 }
 </script>
-
     
 </body>
 </html>
