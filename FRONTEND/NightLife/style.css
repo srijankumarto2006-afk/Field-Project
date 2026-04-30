@@ -82,35 +82,24 @@ height:5px;
 .min{
     display:inline-block;
 }
-.off{
-    background-color: #256FEF;
-
-    color: white;
-    display: inline-block;
-    width: 101px;
-    position: absolute;
-    bottom: 95px;
-    padding-top: 3px;
-    padding-bottom: 19px;
-     padding-left: 4px;
-    height:18px;
-    font-size: 15px;
+.off,.ruppes{
+    display: flex;
+    -webkit-box-align: center;
     align-items: center;
+    gap: 15px;
+    background: linear-gradient(90deg, rgb(17, 85, 203) 0%, rgb(83, 140, 238) 25%, rgb(17, 85, 203) 50%, rgba(17, 85, 203, 0.8) 80%, rgba(17, 85, 203, 0) 100%);
+    padding: 2px 50px 2px 14px;
+    font-weight: 700;
+    line-height: 24px;
+     position: absolute;
 
-}
-.ruppes{
-    background-color: #256FEF;
+    bottom: 19px;      
+    left: 0px;        
 
-    color: white;
-    display: inline-block;
-    width: 72px;
-    position: absolute;
-    bottom: 95px;
-    padding-top: 3px;
-    padding-bottom: 19px;
-     padding-left: 4px;
-    height:18px;
-    font-size: 15px;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    width: auto;      
+    height: auto;
 }
 .image{
     position:relative;
