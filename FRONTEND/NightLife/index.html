@@ -27,12 +27,12 @@
             </div>
 
             <div class="login Box btn">
-           <button class="button">Login</button>
-            </div>
+         <button class="button" onclick="openLogin()">Login</button>
+         </div>
 
-            <div class="signup Box btn">
-             <button class="button">Sign up</button>
-            </div>
+          <div class="signup Box btn">
+          <button class="button" onclick="openSignup()">Sign up</button>
+           </div>
 
         </div>
          <div class="project">
@@ -716,6 +716,116 @@
     </div>
     </div>
      </main>
+      <div class="overlay" id="overlay">
+
+    <!-- LOGIN MODAL -->
+    <div class="login-box">
+
+        <div class="login-header">
+            <h2>Login</h2>
+            <span class="close" onclick="closeLogin()">✕</span>
+        </div>
+
+        <div class="phone-input">
+            <span class="code">🇮🇳 +91</span>
+            <input type="text" placeholder="Phone">
+        </div>
+
+        <button class="otp-btn">Send One Time Password</button>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+        <div class="divide">
+        <button class="email-btn">
+             <img src="https://img.icons8.com/color/48/gmail-new.png" width="20">  <p class="empara">Continue with Email</p>
+        </button>
+        </div>
+      
+       
+<div class="divide">
+        <button class="google-btn" onclick="googleLogin()">
+    <img src="https://img.icons8.com/color/48/google-logo.png" width="20">  
+    <p class="empara">Sign in with Google</p>
+</button>
+</div>
+
+        <p class="signup">
+            New to Hotel Orient Pearl ? <span onclick="openSignup()">Create account</span>
+        </p>
+
+    </div>
+</div>
+
+
+
+<div class="overlaysign" id="over">
+
+    <div class="signup-box">
+
+        <div class="signup-header">
+            <h2>Sign up</h2>
+            <span class="close" onclick="closeSignup()">✕</span>
+        </div>
+
+        <input type="text" placeholder="Full Name" class="input-box">
+        <input type="email" placeholder="Email" class="input-box">
+
+        <div class="terms">
+            <input type="checkbox" class="check">
+            <p>I agree to Hotel Orient Peral's 
+            <span>Terms of Service</span>, 
+            <span>Privacy Policy</span> and 
+            <span>Content Policies</span>
+            </p>
+        </div>
+
+        <button class="create-btn" >Create account</button>
+
+        <div class="divider">or</div>
+
+        <button class="google-btn" onclick="googleLogin()">
+    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" width="20px">
+    Sign in with Google
+</button>
+
+        <div class="login-text">
+            Already have an account? <span onclick="openLogin()">Log in</span>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<script src="script.js"></script>
+
+
+<script>
+window.onload = function () {
+    google.accounts.id.initialize({
+        client_id: "1004628707373-ohhjad7s8guhdr4bprbrdn959dq23gh5.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+    });
+};
+
+function googleLogin() {
+    google.accounts.id.prompt();
+}
+
+function handleCredentialResponse(response) {
+    console.log("TOKEN:", response.credential);
+
+    fetch("https://YOUR-REAL-BACKEND.onrender.com/auth/google")
+    .then(res => res.json())
+    .then(data => {
+        alert("Login Successful: " + data.user.name);
+    })
+    .catch(err => console.log(err));
+}
+</script>
+    
     
 </body>
 </html>
