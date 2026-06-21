@@ -1,8 +1,212 @@
-.filters{
-    display:flex;
+.modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(28, 28, 28, 0.7);
+            display: flex; /* Hidden by default in real apps, flexible here */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background-color: #ffffff;
+            width: 650px;
+            max-width: 90%;
+            border-radius: 12px;
+            box-shadow: rgba(28, 28, 28, 0.15) 0px 4px 20px;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Modal Header */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .modal-header h2 {
+            font-size: 26px;
+            font-weight: 500;
+            color: #1c1c1c;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #1c1c1c;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Modal Body (Sidebar + Content) */
+        .modal-body {
+            display: flex;
+            height: 350px;
+        }
+
+        /* Sidebar Tabs */
+        .sidebar {
+            width: 32%;
+            background-color: #f8f8f8;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px 32px;
+            font-size: 18px;
+            color: #585858;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        /* Active Tab Styling */
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #1c1c1c;
+            font-weight: 500;
+        }
+
+        .tab-button.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #ef4f5f;
+        }
+
+        .tab-subtext {
+            display: block;
+            font-size: 13px;
+            color: #ef4f5f;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        /* Content Area */
+        .content-area {
+            width: 68%;
+            padding: 24px 32px;
+            overflow-y: auto;
+        }
+
+        /* Radio Options */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #363636;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Custom Radio Buttons */
+        .radio-label input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-radio {
+            height: 20px;
+            width: 20px;
+            border: 1px solid #9c9c9c;
+            border-radius: 50%;
+            margin-right: 14px;
+            display: inline-block;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .radio-label input:checked ~ .custom-radio {
+            border-color: #ef4f5f;
+        }
+
+        .radio-label input:checked ~ .custom-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ef4f5f;
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 32px;
+            border-top: 1px solid #e0e0e0;
+            gap: 16px;
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #696969;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 12px 24px;
+            border-radius: 6px;
+        }
+
+        .clear-btn:hover {
+            background-color: #f4f4f4;
+        }
+
+        .apply-btn {
+            background-color: #ef4f5f;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .apply-btn:hover {
+            background-color: #e03f4f;
+        }
+
+.filters {
+     display:flex;
     gap:12px;
     margin-top:15px;
     flex-wrap:wrap;
+    margin-bottom: 26px;
+
 }
 
 .filter-btn{
@@ -27,6 +231,16 @@
 
 
 
+.hidden{
+    display: none !important;
+}
+.show{
+    display: none;
+}
+.kul{
+     display: none;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -40,31 +254,43 @@
 .hotelname,.rate,.type,.price{
     display: inline-block;
 }
-.restaurant{
+.rest {
     margin-top: 5px;
     margin-bottom: 10px;
+    position: relative; /* Add this so the absolute rate badge positions relative to this row */
+    display: flex;      /* Optional but recommended: switches row to flex for cleaner alignment */
+    justify-content: space-between;
+    align-items: center;
 }
-.rate{
+
+.rate {
     color: white;
     background-color: green;
     border-radius: 7px;
-    padding: 4px;
-    width: 39px;
-    height: 25px;
+    padding: 4px 6px;       /* Uniform padding that adjusts to content */
+    width: auto;            /* FIX: Change from 39px to auto so the text and star fit perfectly */
+    height: auto;           /* FIX: Change from 25px to auto */
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-flex;   /* Aligns the number and the star cleanly on one line */
     align-items: center;
+    gap: 2px;
+    
+    /* Positioning alignment */
     position: absolute;
     right: 5px;
-    font-size: 14px;
+    top: 0;
 }
 .hotelname{
     font-size: large;
     font-weight: bold;
 }
 
-body{
-    
-    overflow-x: hidden;
+body {
+    overflow-x: clip; /* Fixes position: sticky without breaking horizontal page layouts */
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 .header{
    background:white;
@@ -73,7 +299,7 @@ border-bottom:1px solid #eee;
 .walkin{
 height:5px;
 }
-.time{
+.distance{
     position:absolute;
     right: 5px;
     bottom: 1px;
@@ -251,15 +477,39 @@ height:5px;
      display: flex;
      justify-content: space-around;
 }
-.second{
-    padding-bottom:6px;
+.second {
+    padding-bottom: 6px;
+    position: -webkit-sticky;
     position: sticky;
-    top:0px;
+    top: 0px;                  /* This sticks first at the very top */
     background-color: white;
-    z-index: 8;
-    
+    z-index: 99;
+}
+.heading {
+    box-sizing:border-box;
+color:rgb(28, 28, 28);
+display:block;
+font-family:Okra, Helvetica, sans-serif;
+font-size:30px;
+font-weight:500;
+height:36px;
+line-height:36px;
+margin-block-end:15px;
+margin-block-start:10px;
+margin-bottom:10px;
+margin-inline-end:0px;
+margin-inline-start:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:10px;
 }
 
+.banner{
+    height:226.46px;
+    width:1100.4px;
+    cursor:pointer;
+    border-radius: 20px;
+}
 .Box{
     display:inline-block;
     
@@ -457,14 +707,14 @@ font-size:16px;
 /*-------------------------------------Login------------------------------------*/
 
 
-.overlay {
+.overlay{
     position: fixed;       /* MUST be fixed */
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;         /* full screen height */
     background: rgba(0, 0, 0, 0.5);  /* dark overlay */
-    display: none;         /* hidden initially */
+    display: flex;/* hidden initially */
     justify-content: center;
     align-items: center;
     z-index: 9999;         /* very high to cover everything */
@@ -597,8 +847,8 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.65);
+display: flex;
 
-display:none;
 justify-content:center;
 align-items:center;
 z-index: 9999;  

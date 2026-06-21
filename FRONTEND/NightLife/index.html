@@ -27,11 +27,11 @@
             </div>
 
             <div class="login Box btn">
-         <button class="button" onclick="openLogin()">Login</button>
+         <button class="button" id="login" >Login</button>
          </div>
 
           <div class="signup Box btn">
-          <button class="button" onclick="openSignup()">Sign up</button>
+          <button class="button" id="sign">Sign up</button>
            </div>
 
         </div>
@@ -41,10 +41,10 @@
             <div class="pehla Box">
 
             <div class="plate Box">
-                <a href="../DiningOut/index.html"><img src="./fork.avif" alt="fork_icon" class="fork"></a>
+                <a href="../DiningOut/newindex.html"><img src="./fork.avif" alt="fork_icon" class="fork"></a>
             </div>
             <div class="dining Box">
-                <a href="../DiningOut/index.html" class="rang">DiningOut</a>
+                <a href="../DiningOut/newindex.html" class="rang">DiningOut</a>
             </div>
             </div>
             
@@ -716,14 +716,15 @@
     </div>
     </div>
      </main>
-      <div class="overlay" id="overlay">
+     <!-- ----------------------login modal ------------------------->
+      <div class="overlay hidden" id="lay">
 
-    <!-- LOGIN MODAL -->
-    <div class="login-box">
+    
+    <div class="login-box"   >
 
         <div class="login-header">
             <h2>Login</h2>
-            <span class="close" onclick="closeLogin()">✕</span>
+            <span class="close" id="loginclose">✕</span>
         </div>
 
         <div class="phone-input">
@@ -732,6 +733,11 @@
         </div>
 
         <button class="otp-btn">Send One Time Password</button>
+
+        <input type="email" id="loginEmail" placeholder="Enter Email" class="input-box">
+<input type="password" id="loginPassword" placeholder="Enter Password" class="input-box">
+
+<button class="otp-btn" onclick="loginUser()">Login with Email</button>
 
         <div class="divider">
             <span>or</span>
@@ -751,21 +757,21 @@
 </div>
 
         <p class="signup">
-            New to Hotel Orient Pearl ? <span onclick="openSignup()">Create account</span>
+            New to Hotel Orient Pearl ? <span onclick="openSignup()" id="create">Create account</span>
         </p>
 
     </div>
 </div>
 
+ <!-------------------------- Signup MODAL--------------------- -->
 
-
-<div class="overlaysign" id="over">
+<div class="overlaysign hidden" id="overfull">
 
     <div class="signup-box">
 
         <div class="signup-header">
             <h2>Sign up</h2>
-            <span class="close" onclick="closeSignup()">✕</span>
+            <span class="close" id="signclose" onclick="closeSignup()">✕</span>
         </div>
 
         <input type="text" placeholder="Full Name" class="input-box">
@@ -790,7 +796,7 @@
 </button>
 
         <div class="login-text">
-            Already have an account? <span onclick="openLogin()">Log in</span>
+            Already have an account? <span onclick="openLogin()" id="newlogin">Log in</span>
         </div>
 
     </div>
@@ -802,29 +808,7 @@
 <script src="script.js"></script>
 
 
-<script>
-window.onload = function () {
-    google.accounts.id.initialize({
-        client_id: "1004628707373-ohhjad7s8guhdr4bprbrdn959dq23gh5.apps.googleusercontent.com",
-        callback: handleCredentialResponse
-    });
-};
 
-function googleLogin() {
-    google.accounts.id.prompt();
-}
-
-function handleCredentialResponse(response) {
-    console.log("TOKEN:", response.credential);
-
-    fetch("https://YOUR-REAL-BACKEND.onrender.com/auth/google")
-    .then(res => res.json())
-    .then(data => {
-        alert("Login Successful: " + data.user.name);
-    })
-    .catch(err => console.log(err));
-}
-</script>
     
     
 </body>

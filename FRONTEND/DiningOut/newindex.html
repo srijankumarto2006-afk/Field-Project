@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./newstyle.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="pura">
+        
+        <div class="head">
+        <div class="first">
+            <div class="zomato Box btn ">
+               <img src="./logo.png" tabindex="0" class="pic">
+            </div>
+
+            <div class="search Box btn ">
+                <form >
+                <input type="text" class="searching" placeholder="Search for restaurant, cuisine or a dish   ">
+                </form>
+            </div>
+
+            <div class="login Box btn">
+           <button class="button open-btn" id="login" >Login</button>
+           
+            </div>
+
+            <div class="signup Box btn">
+             <button class="button" id="sign">Sign up</button>
+            </div>
+
+        </div>
+        <div class="project">
+        <div class="second">
+
+            <div class="pehla Box">
+
+            <div class="plate Box">
+                <a href="../DiningOut/index.html"><img src="./fork.avif" alt="fork_icon" class="fork"></a>
+            </div>
+            <div class="dining Box">
+                 <a href="../DiningOut/index.html" class="rang">DiningOut</a>
+            </div>
+            </div>
+            
+               
+            <div class="dusra Box">
+
+            <div class="scooter Box">
+                <a href="../Delivery/index.html"><img src="./scooter.webp" alt="scooter_icon" class="gaddi"></a>
+            </div>
+            
+            <div class="Deli Box">
+               <a href="../Delivery/index.html" class="rang">Delivery</a>
+            </div>
+        </div>
+        
+
+
+        <div class="tisra Box">
+         <div class="nigh Box">
+                <a href="../NightLife/index.html"><img src="./Nightlife.webp" alt="night" class="nighticon"></a>
+            </div>
+            
+            <div class="Nightl Box">
+                <a href="../NightLife/index.html" class="rang">Nightlife</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </header>
+    <div class="xx">
+    <div class="project">
+<div class="full">
+<div class="famous">
+        <div class="c1">
+            <p>Collections</p>
+        </div>
+        <div class="know">
+            <p>Explore curated lists of top restaurants, cafes, pubs, and bars across the globe-crafted from the world’s most exciting food and nightlife trends.</p>
+        </div>
+        <div class="pictures">
+        <div class="pic1 Box new">
+            <img src="./bar.avif" alt="hotelpic" class="img1">
+            <div class="trend">
+            <div class="para1">Top Trending Spots</div>
+            <div class="pa2">38 places &#9654;</div>
+            </div>
+        </div>
+        <div class="pic3 Box new">
+            <img src="./BEST.webp" alt="hotelpic"class="img1">
+            <div class="trend">
+            <div class="para1">Romantic Dining Places</div>
+            <div class="pa2">29 places &#9654;</div>
+            </div>
+        </div>
+        <div class="pic2 Box new">
+            <img src="./DABI.webp" alt="hotelpic"class="img1">
+            <div class="trend">
+            <div class="para1">Best Pubs and Bars</div>
+            <div class="pa2">38 places &#9654;</div>
+            </div>
+        </div>
+        <div class="pic4 Box new">
+            <img src="./hidden.avif" alt="hotelpic"class="img1">
+            <div class="trend">
+            <div class="para1">Lit Party Places</div>
+            <div class="pa2">23 places &#9654;</div>
+            </div>
+        </div>
+        <div class="pic5 Box new">
+            <img src="./open.avif" alt="hotelpic" class="img1">
+            <div class="trend">
+            <div class="para1">New in Town</div>
+            <div class="pa2">14 places &#9654;</div>
+            </div>
+        </div>
+        
+        </div>
+        </div>
+        </div>
+        
+
+
+</div>
+    </div>
+    <div class="project">
+    <div id="head" class="filters">
+       <button id="filter" class="filter-btn"> ⚙ Filters</button>
+       <button id="offers"class="filter-btn">Offers</button>
+       <button id="Rating"class="filter-btn">Rating:4.5+</button>
+       <button id="Pet"class="filter-btn">Pet Friendly</button>
+       <button id="out"class="filter-btn">Outdoor Seating</button>
+       <button id="Alcohol"class="filter-btn">Serves Alcohol</button>
+       <button id="Open"class="filter-btn">Open Now</button>
+       </div>
+
+<div class="banner">
+    <img src="https://b.zmtcdn.com/data/o2_assets/e067a1cf0d3fe27b366402b98b994e9f1716296909.png"  class="banner" alt=" banner">
+  </div>
+
+       <div class="ding">
+    <p class="heading">Restaurants in Patna</p>
+ </div>
+  
+
+</div>
+
+
+ 
+<div id="root"></div>
+
+       <div class="modal-overlay hidden" id="filterModal">
+        <div class="modal-container">
+            
+            <div class="modal-header">
+                <h2>Filters</h2>
+                <button class="close-btn"id="close" onclick="toggleModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                
+                <div class="sidebar">
+                    <button class="tab-button active">
+                        Sort by
+                        <span class="tab-subtext" id="selected-sort-text">Popularity</span>
+                    </button>
+                    <button class="tab-button">Cuisines</button>
+                    <button class="tab-button">Rating</button>
+                    <button class="tab-button">Cost for two</button>
+                    <button class="tab-button">More filters</button>
+                </div>
+
+                <div class="content-area">
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Popularity" checked>
+                            <span class="custom-radio"></span>
+                            Popularity
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Rating: High to Low">
+                            <span class="custom-radio"></span>
+                            Rating: High to Low
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Cost: Low to High">
+                            <span class="custom-radio"></span>
+                            Cost: Low to High
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Cost: High to Low">
+                            <span class="custom-radio"></span>
+                            Cost: High to Low
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Distance">
+                            <span class="custom-radio"></span>
+                            Distance
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="clear-btn" id="clearBtn">Clear all</button>
+                <button class="apply-btn" id="applyBtn">Apply</button>
+            </div>
+
+        </div>
+    </div>
+
+         <div class="overlay hidden" id="lay">
+
+    <!-- LOGIN MODAL -->
+    <div class="login-box"   >
+
+        <div class="login-header">
+            <h2>Login</h2>
+            <span class="close" id="loginclose">✕</span>
+        </div>
+
+        <div class="phone-input">
+            <span class="code">🇮🇳 +91</span>
+            <input type="text" placeholder="Phone">
+        </div>
+
+        <button class="otp-btn">Send One Time Password</button>
+
+        <input type="email" id="loginEmail" placeholder="Enter Email" class="input-box">
+<input type="password" id="loginPassword" placeholder="Enter Password" class="input-box">
+
+<button class="otp-btn" onclick="loginUser()">Login with Email</button>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+        <div class="divide">
+        <button class="email-btn">
+             <img src="https://img.icons8.com/color/48/gmail-new.png" width="20">  <p class="empara">Continue with Email</p>
+        </button>
+        </div>
+      
+       
+<div class="divide">
+        <button class="google-btn" onclick="googleLogin()">
+    <img src="https://img.icons8.com/color/48/google-logo.png" width="20">  
+    <p class="empara">Sign in with Google</p>
+</button>
+</div>
+
+        <p class="signup">
+            New to Hotel Orient Pearl ? <span onclick="openSignup()" id="create">Create account</span>
+        </p>
+
+    </div>
+</div>
+
+
+
+<div class="overlaysign hidden" id="overfull">
+
+    <div class="signup-box">
+
+        <div class="signup-header">
+            <h2>Sign up</h2>
+            <span class="close" id="signclose" onclick="closeSignup()">✕</span>
+        </div>
+
+        <input type="text" placeholder="Full Name" class="input-box">
+        <input type="email" placeholder="Email" class="input-box">
+
+        <div class="terms">
+            <input type="checkbox" class="check">
+            <p>I agree to Hotel Orient Peral's 
+            <span>Terms of Service</span>, 
+            <span>Privacy Policy</span> and 
+            <span>Content Policies</span>
+            </p>
+        </div>
+
+        <button class="create-btn" >Create account</button>
+
+        <div class="divider">or</div>
+
+        <button class="google-btn" onclick="googleLogin()">
+    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" width="20px">
+    Sign in with Google
+</button>
+
+        <div class="login-text">
+            Already have an account? <span onclick="openLogin()" id="newlogin">Log in</span>
+        </div>
+
+    </div>
+
+
+
+</div>
+       <script src="./newscript.js"></script>
+
+ </body>
+ </html>

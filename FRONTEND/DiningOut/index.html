@@ -20,7 +20,7 @@
         <div class="head">
         <div class="first">
             <div class="zomato Box btn ">
-               <img src="../Delivery/logo.png" tabindex="0" class="pic">
+               <img src="./logo.png" tabindex="0" class="pic">
             </div>
 
             <div class="search Box btn ">
@@ -129,15 +129,28 @@
         </div>
         </div>
         </div>
+        
 
 
 </div>
     </div>
-          
+    <div class="project">
+    <div id="head" class="filters">
+       <button id="filters" class="filter-btn"> ⚙ Filters</button>
+       <button id="offers"class="filter-btn">Offers</button>
+       <button id="Rating"class="filter-btn">Rating:4.5+</button>
+       <button id="Pet"class="filter-btn">Pet Friendly</button>
+       <button id="out"class="filter-btn">Outdoor Seating</button>
+       <button id="Alcohol"class="filter-btn">Serves Alcohol</button>
+       <button id="Open"class="filter-btn">Open Now</button>
+       </div>
+</div>
+ 
+    
     
     <main>
     <div class="project">
-    <div class="card" data-link="photo.html">
+    <div class="card" id="baby">
         <div class="image">
             <img src="https://b.zmtcdn.com/data/pictures/3/22295613/aade5a7026490f1cdc60f7f5dc094f78_featured_v2.jpg?output-format=webp" alt="hotel" class="img">
         </div>
@@ -1062,6 +1075,11 @@
 
         <button class="otp-btn">Send One Time Password</button>
 
+        <input type="email" id="loginEmail" placeholder="Enter Email" class="input-box">
+<input type="password" id="loginPassword" placeholder="Enter Password" class="input-box">
+
+<button class="otp-btn" onclick="loginUser()">Login with Email</button>
+
         <div class="divider">
             <span>or</span>
         </div>
@@ -1146,8 +1164,12 @@ function googleLogin() {
 function handleCredentialResponse(response) {
     console.log("TOKEN:", response.credential);
 
-    fetch("https://YOUR-REAL-BACKEND.onrender.com/auth/google")
-    .then(res => res.json())
+    function handleCredentialResponse(response) {
+    console.log("TOKEN:", response.credential);
+
+    alert("Google login received (but backend not connected yet)");
+}
+    then(res => res.json())
     .then(data => {
         alert("Login Successful: " + data.user.name);
     })

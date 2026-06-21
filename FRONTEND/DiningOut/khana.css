@@ -1,0 +1,393 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#fff;
+    padding:30px 60px;
+}
+
+.filters{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.filter-btn{
+    background:#fff;
+    border:1px solid #d9d9d9;
+    color:#666;
+    font-size:15px;
+    padding:10px 16px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+}
+
+.filter-btn:hover{
+    background:#f5f5f5;
+    border-color:#bdbdbd;
+}
+
+.filter-btn:active{
+    transform:scale(0.98);
+}
+.card{
+    display: inline-block;
+    position: relative;
+    border:9px solid white;
+    border-radius: 15px;
+    cursor: pointer;
+    align-items: center;
+    margin:5px;
+    margin-right: 35px;
+    margin-top:20px;
+    max-width: auto;
+    padding-right: 6px;
+
+    
+    transition: all 0.1s ease;
+
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08);
+}
+.card:hover{
+    background-color: white;
+    border-color: white;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.18);
+
+}
+.card img{
+     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+   
+}
+.card-content{
+    padding:5px;
+}
+.card-header{
+   margin-bottom: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.card-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:bold;
+
+}
+.card-header .rating{
+   padding: 2px 6px;
+   background-color:  #008000;
+   border-radius: 5px;
+   color:#fff;
+   font-size: 15px;
+
+}  
+
+.card-footer{
+    margin-top: 10px;
+    font-size:14px;
+    display: flex;
+  
+   justify-content: space-between;
+}
+.card-location{
+    margin-top: 10px;
+    font-size:14px;
+    display: flex;
+  
+   justify-content: space-between;
+}
+
+.pivc{
+ width: 280px;
+height: 220px;
+
+overflow: hidden;
+border-radius: 15px;
+display: inline-block;
+position: relative;
+}
+.name{
+    margin-top:6px;
+    margin-bottom: 7px;
+    max-width: 280px;
+    height:22px;
+    font-size: 14px;
+    letter-spacing: normal;
+}
+.cuisine{
+    margin-top: 8px ;
+    margin-bottom: 5px;
+    max-width:auto;
+    height:21px;
+    font-size: 16px;
+    
+}
+.trend{
+    position:relative;
+    bottom:32px;
+    margin-left:10px;
+    color: white;
+    margin-left:20px;
+   
+    
+    z-index:2;
+}
+.discount{
+   width:250px;
+   height:30px;
+    position: absolute;
+    font-size:20px;
+    font-weight: 600;
+   
+
+}
+.pivc::after{
+    content:"";
+    position:absolute;
+    top:0px;
+   
+   width: 280px;
+    height: 220px;
+    border-radius: 20px;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.8),
+        rgba(0,0,0,0),
+        rgba(0,0,0,0)
+    );
+}
+
+
+.project{
+    margin-left:10px;
+     margin-right: 10px;
+}
+
+
+
+
+        /* Trigger Button (Just for preview purposes) */
+        .open-modal-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ef4f5f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Modal Overlay Background */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(28, 28, 28, 0.7);
+            display: flex; /* Hidden by default in real apps, flexible here */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background-color: #ffffff;
+            width: 650px;
+            max-width: 90%;
+            border-radius: 12px;
+            box-shadow: rgba(28, 28, 28, 0.15) 0px 4px 20px;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease-out;
+        }
+        .hidden{
+           display:none;
+        }
+        @keyframes fadeIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Modal Header */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .modal-header h2 {
+            font-size: 26px;
+            font-weight: 500;
+            color: #1c1c1c;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #1c1c1c;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Modal Body (Sidebar + Content) */
+        .modal-body {
+            display: flex;
+            height: 350px;
+        }
+
+        /* Sidebar Tabs */
+        .sidebar {
+            width: 32%;
+            background-color: #f8f8f8;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px 32px;
+            font-size: 18px;
+            color: #585858;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        /* Active Tab Styling */
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #1c1c1c;
+            font-weight: 500;
+        }
+
+        .tab-button.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #ef4f5f;
+        }
+
+        .tab-subtext {
+            display: block;
+            font-size: 13px;
+            color: #ef4f5f;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        /* Content Area */
+        .content-area {
+            width: 68%;
+            padding: 24px 32px;
+            overflow-y: auto;
+        }
+
+        /* Radio Options */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #363636;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Custom Radio Buttons */
+        .radio-label input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-radio {
+            height: 20px;
+            width: 20px;
+            border: 1px solid #9c9c9c;
+            border-radius: 50%;
+            margin-right: 14px;
+            display: inline-block;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .radio-label input:checked ~ .custom-radio {
+            border-color: #ef4f5f;
+        }
+
+        .radio-label input:checked ~ .custom-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ef4f5f;
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 32px;
+            border-top: 1px solid #e0e0e0;
+            gap: 16px;
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #696969;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 12px 24px;
+            border-radius: 6px;
+        }
+
+        .clear-btn:hover {
+            background-color: #f4f4f4;
+        }
+
+        .apply-btn {
+            background-color: #ef4f5f;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .apply-btn:hover {
+            background-color: #e03f4f;
+        }

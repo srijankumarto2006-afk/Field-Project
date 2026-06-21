@@ -5,18 +5,34 @@ document.querySelectorAll(".card").forEach(card => {
   });
 });
 
-function openLogin() {
-    document.getElementById("overlay").style.display = "flex";
-}
+// Close Login Modal
+document.getElementById("loginclose").addEventListener("click", () => {
+   document.getElementById("lay").classList.add("hidden");
+});
 
-function closeLogin() {
-    document.getElementById("overlay").style.display = "none";
-}
+// Close Signup Modal
+document.getElementById("signclose").addEventListener("click", () => {
+   document.getElementById("overfull").classList.add("hidden");
+});
 
-function openSignup() {
-    document.getElementById("over").style.display = "flex";
-}
+// Open Login Modal
+document.getElementById("login").addEventListener("click", () => {
+   document.getElementById("lay").classList.remove("hidden");
+});
 
-function closeSignup() {
-    document.getElementById("over").style.display = "none";
-}
+// Open Signup Modal
+document.getElementById("sign").addEventListener("click", () => {
+   document.getElementById("overfull").classList.remove("hidden");
+});
+
+// Switch from Login Modal to Signup Modal
+// Replace "create" with the actual ID of your "Create account" button text link
+document.getElementById("create").addEventListener("click", () => {
+   document.getElementById("lay").classList.add("hidden");      // Hides login safely
+   document.getElementById("overfull").classList.remove("hidden"); // Shows signup
+});
+
+document.getElementById("newlogin").addEventListener("click", () => {
+   document.getElementById("overfull").classList.add("hidden");      // Hides login safely
+   document.getElementById("lay").classList.remove("hidden"); // Shows signup
+});

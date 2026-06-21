@@ -20,3 +20,7 @@ function openSignup() {
 function closeSignup() {
     document.getElementById("over").style.display = "none";
 }
+
+document.getElementById("baby").addEventListener("click",()=>{
+    window.location.href = "photo.html";
+})

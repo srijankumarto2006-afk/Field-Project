@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato Filters Modal Clone</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Okra', Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Trigger Button (Just for preview purposes) */
+        .open-modal-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ef4f5f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Modal Overlay Background */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(28, 28, 28, 0.7);
+            display: flex; /* Hidden by default in real apps, flexible here */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background-color: #ffffff;
+            width: 650px;
+            max-width: 90%;
+            border-radius: 12px;
+            box-shadow: rgba(28, 28, 28, 0.15) 0px 4px 20px;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Modal Header */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .modal-header h2 {
+            font-size: 26px;
+            font-weight: 500;
+            color: #1c1c1c;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #1c1c1c;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Modal Body (Sidebar + Content) */
+        .modal-body {
+            display: flex;
+            height: 350px;
+        }
+
+        /* Sidebar Tabs */
+        .sidebar {
+            width: 32%;
+            background-color: #f8f8f8;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px 32px;
+            font-size: 18px;
+            color: #585858;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        /* Active Tab Styling */
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #1c1c1c;
+            font-weight: 500;
+        }
+
+        .tab-button.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #ef4f5f;
+        }
+
+        .tab-subtext {
+            display: block;
+            font-size: 13px;
+            color: #ef4f5f;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        /* Content Area */
+        .content-area {
+            width: 68%;
+            padding: 24px 32px;
+            overflow-y: auto;
+        }
+
+        /* Radio Options */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #363636;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Custom Radio Buttons */
+        .radio-label input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-radio {
+            height: 20px;
+            width: 20px;
+            border: 1px solid #9c9c9c;
+            border-radius: 50%;
+            margin-right: 14px;
+            display: inline-block;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .radio-label input:checked ~ .custom-radio {
+            border-color: #ef4f5f;
+        }
+
+        .radio-label input:checked ~ .custom-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ef4f5f;
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 32px;
+            border-top: 1px solid #e0e0e0;
+            gap: 16px;
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #696969;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 12px 24px;
+            border-radius: 6px;
+        }
+
+        .clear-btn:hover {
+            background-color: #f4f4f4;
+        }
+
+        .apply-btn {
+            background-color: #ef4f5f;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .apply-btn:hover {
+            background-color: #e03f4f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal-overlay" id="filterModal">
+        <div class="modal-container">
+            
+            <div class="modal-header">
+                <h2>Filters</h2>
+                <button class="close-btn" onclick="toggleModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                
+                <div class="sidebar">
+                    <button class="tab-button active">
+                        Sort by
+                        <span class="tab-subtext" id="selected-sort-text">Popularity</span>
+                    </button>
+                    <button class="tab-button">Cuisines</button>
+                    <button class="tab-button">Rating</button>
+                    <button class="tab-button">Cost for two</button>
+                    <button class="tab-button">More filters</button>
+                </div>
+
+                <div class="content-area">
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Popularity" checked>
+                            <span class="custom-radio"></span>
+                            Popularity
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Rating: High to Low">
+                            <span class="custom-radio"></span>
+                            Rating: High to Low
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Cost: Low to High">
+                            <span class="custom-radio"></span>
+                            Cost: Low to High
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Cost: High to Low">
+                            <span class="custom-radio"></span>
+                            Cost: High to Low
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Distance">
+                            <span class="custom-radio"></span>
+                            Distance
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="clear-btn" id="clearBtn">Clear all</button>
+                <button class="apply-btn" id="applyBtn">Apply</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('filterModal');
+        const radioInputs = document.querySelectorAll('input[name="sort-option"]');
+        const subtext = document.getElementById('selected-sort-text');
+        const clearBtn = document.getElementById('clearBtn');
+        const applyBtn = document.getElementById('applyBtn');
+
+        // Dynamic Subtext updates based on Selected Radio item
+        radioInputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                subtext.textContent = e.target.value;
+            });
+        });
+
+        // Clear All Action Button Functionality
+        clearBtn.addEventListener('click', () => {
+            // Defaulting back to Popularity filter standard setup
+            radioInputs[0].checked = true;
+            subtext.textContent = "Popularity";
+        });
+
+        // Apply Button Action Functionality
+        applyBtn.addEventListener('click', () => {
+            const checkedOption = document.querySelector('input[name="sort-option"]:checked').value;
+            alert(`Filters saved! Sorting order applied: ${checkedOption}`);
+        });
+
+        // Basic toggle action helper to close if necessary
+        function toggleModal() { 
+            modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'flex' : 'none';
+        }
+    </script>
+</body>
+</html>

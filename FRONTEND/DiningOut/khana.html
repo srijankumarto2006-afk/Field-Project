@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./khana.css">
+</head>
+<body>
+    <div id="head" class="filters">
+       <button id="filters" class="filter-btn"> ⚙ Filters</button>
+       <button id="offers"class="filter-btn">Offers</button>
+       <button id="Rating"class="filter-btn">Rating:4.5+</button>
+       <button id="Pet"class="filter-btn">Pet Friendly</button>
+       <button id="out"class="filter-btn">Outdoor Seating</button>
+       <button id="Alcohol"class="filter-btn">Serves Alcohol</button>
+       <button id="Open"class="filter-btn">Open Now</button>
+
+
+       <div id="root"></div>
+       <div class="modal-overlay hidden" id="filterModal">
+        <div class="modal-container">
+            
+            <div class="modal-header">
+                <h2>Filters</h2>
+                <button class="close-btn"id="close" onclick="toggleModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                
+                <div class="sidebar">
+                    <button class="tab-button active">
+                        Sort by
+                        <span class="tab-subtext" id="selected-sort-text">Popularity</span>
+                    </button>
+                    <button class="tab-button">Cuisines</button>
+                    <button class="tab-button">Rating</button>
+                    <button class="tab-button">Cost for two</button>
+                    <button class="tab-button">More filters</button>
+                </div>
+
+                <div class="content-area">
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Popularity" checked>
+                            <span class="custom-radio"></span>
+                            Popularity
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Rating: High to Low">
+                            <span class="custom-radio"></span>
+                            Rating: High to Low
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Cost: Low to High">
+                            <span class="custom-radio"></span>
+                            Cost: Low to High
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Cost: High to Low">
+                            <span class="custom-radio"></span>
+                            Cost: High to Low
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sort-option" value="Distance">
+                            <span class="custom-radio"></span>
+                            Distance
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="clear-btn" id="clearBtn">Clear all</button>
+                <button class="apply-btn" id="applyBtn">Apply</button>
+            </div>
+
+        </div>
+    </div>
+       
+ <script src="./app.js"></script>
+    </div>
+</body>
+</html>
