@@ -1815,3 +1815,12 @@ document.getElementById("newlogin").addEventListener("click", () => {
    document.getElementById("overfull").classList.add("hidden");      // Hides login safely
    document.getElementById("lay").classList.remove("hidden"); // Shows signup
 });
+
+const cards = document.querySelectorAll(".card");
+
+// Select first restaurant card
+const firstCard = cards[0];
+
+firstCard.addEventListener("click", () => {
+    window.location.href = "./photo.html";
+});
