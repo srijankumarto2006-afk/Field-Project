@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/DiningOut/index.html",
+      "destination": "/DiningOut/newindex.html",
+      "permanent": true
+    }
+  ]
+}
