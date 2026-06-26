@@ -26,13 +26,35 @@
                 </form>
             </div>
 
-            <div class="login Box btn">
-         <button class="button" id="login" >Login</button>
-         </div>
+             <div class="login Box btn" id="loginBox">
+         <button class="button open-btn" id="login">Login</button>
+        </div>
 
-          <div class="signup Box btn">
-          <button class="button" id="sign">Sign up</button>
-           </div>
+       <div class="signup Box btn" id="signupBox">
+       <button class="button" id="sign">Sign up</button>
+        </div>
+
+         <div class="user-profile hidden" id="userBox">
+
+    <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A" alt="User" class="user-icon">
+
+    <span id="welcomeUser"></span>
+
+    <span class="arrow">&#9662;</span>
+
+    <div class="profile-menu" id="profileMenu">
+
+        <p>Profile</p>
+        <p>Reviews</p>
+        <p>Settings</p>
+
+        <hr>
+
+        <p id="logoutBtn">Log out</p>
+
+    </div>
+
+</div>
 
         </div>
          <div class="project">
@@ -727,12 +749,6 @@
             <span class="close" id="loginclose">✕</span>
         </div>
 
-        <div class="phone-input">
-            <span class="code">🇮🇳 +91</span>
-            <input type="text" placeholder="Phone">
-        </div>
-
-        <button class="otp-btn">Send One Time Password</button>
 
         <input type="email" id="loginEmail" placeholder="Enter Email" class="input-box">
 <input type="password" id="loginPassword" placeholder="Enter Password" class="input-box">
@@ -804,7 +820,7 @@
 
 
 </div>
-
+ <script src="../auth.js"></script>
 <script src="script.js"></script>
 
 

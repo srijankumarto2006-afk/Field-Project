@@ -206,6 +206,76 @@ height:5px;
     justify-content: space-around;
     
 }
+
+.user-profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    cursor:pointer;
+    position:relative;
+    margin-left:25px;
+}
+
+.user-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    margin-bottom: 25px;
+    margin-left:-20px;
+    margin-right:80px;
+   
+}
+
+#welcomeUser{
+color:rgb(28, 28, 28);
+cursor:pointer;
+display:block;
+font-family:Okra, Helvetica, sans-serif;
+font-size:16px;
+font-weight:500;
+height:20.8px;
+margin-bottom: 25px;
+margin-left:-88px;
+margin-right:45px;
+margin-top:0px;
+max-width:90px;
+text-overflow:ellipsis;
+text-wrap-mode:nowrap;
+
+}
+
+.arrow{
+    font-size:15px;
+     margin-bottom: 25px;
+     font-size:15px;
+     margin-bottom: 25px;
+     margin-left:-56px;
+    margin-right: 55px;
+}
+
+.profile-menu{
+    position:absolute;
+    top:60px;
+    right:0;
+    width:130px;
+    height:200px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+    display:none;
+    overflow:hidden;
+}
+
+.profile-menu p{
+    padding:15px 20px;
+    margin:0;
+    cursor:pointer;
+}
+
+.profile-menu p:hover{
+    background:#f5f5f5;
+}
+
 .pic{
     height:90px;
     width:310px;
@@ -215,7 +285,7 @@ height:5px;
     
 }
 .searching{
-    width:45rem;
+      width:45rem;
     height:45px;
     position:relative;
     bottom:15px;
@@ -228,11 +298,12 @@ height:5px;
 }
 .btn{
      margin-top:8px;
-     margin-right:90px;
+     margin-right:0px;
 }
 .login{
     margin-top:8px;
-     margin-right: -30px;
+     margin-right: -80px;
+     margin-left: 50px;
   
 
     
@@ -248,7 +319,7 @@ height:5px;
    background-color: white;
    color:grey;
     margin-top:22px;
-    margin-right:22px;
+    margin-right:20px;
 
 }
 .head{
