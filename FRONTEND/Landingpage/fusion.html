@@ -3,49 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zuri Restaurant</title>
-    <link rel="stylesheet" href="./fm.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Srijankumar - Zomato Profile Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            color: #1c1c1c;
+        }
+
+        /* --- Navbar Styles --- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 10px 10%;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-grow: 1;
+            max-width: 700px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            font-style: italic;
+            color: #1c1c1c;
+            text-decoration: none;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.03);
+            width: 100%;
+            padding: 10px;
+        }
+
+        .location-picker {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-right: 15px;
+            border-right: 1px solid #cfcfcf;
+            color: #828282;
+            font-size: 14px;
+            min-width: 120px;
+        }
+
+        .location-picker i.fa-location-dot {
+            color: #ff4d4d;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 15px;
+            flex-grow: 1;
+            color: #9c9c9c;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            color: #1c1c1c;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .profile-nav-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e3e8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9aa8cd;
+            font-size: 20px;
+        }
+
+        .profile-nav-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4f4f4f;
+        }
+
+        /* --- Header Banner --- */
+        .profile-header {
+            max-width: 1100px;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 260px;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #e3e8f8;
+            border: 4px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9aa8cd;
+            font-size: 60px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .user-name {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+        }
+
+        .header-stats-action {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 20px;
+        }
+
+        .edit-profile-btn {
+            background: #ef4f5f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .edit-profile-btn:hover {
+            background: #df3f4f;
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 25px;
+            color: #fff;
+            text-align: center;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+        }
+
+        .stat-item span {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .stat-item label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* --- Main Content Section --- */
+        .main-container {
+            max-width: 1100px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            padding: 0 10px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #9c9c9c;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .menu-item {
+            padding: 14px 20px;
+            font-size: 14px;
+            color: #4f4f4f;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .menu-item:hover {
+            background: #fcfcfc;
+            color: #ef4f5f;
+        }
+
+        .menu-item.active {
+            color: #ef4f5f;
+            background: linear-gradient(90deg, #fff5f6 0%, #fff 100%);
+            border-left-color: #ef4f5f;
+            font-weight: 500;
+        }
+
+        /* Content Area */
+        .content-area {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            min-height: 400px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .content-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: #1c1c1c;
+            margin-bottom: 40px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .empty-illustration {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 20px;
+        }
+
+        /* Creating custom vector-styled elements using pure CSS matching the image icon */
+        .circle-bg {
+            width: 120px;
+            height: 120px;
+            background: #eff2f7;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+        }
+
+        .coffee-cup {
+            position: absolute;
+            top: 15px;
+            left: 5px;
+            width: 30px;
+            height: 30px;
+            background: #a07869;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            z-index: 4;
+            box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .pencil {
+            position: absolute;
+            top: 15px;
+            right: 5px;
+            width: 45px;
+            height: 8px;
+            background: #f2c94c;
+            transform: rotate(-35deg);
+            z-index: 4;
+            border-radius: 2px;
+        }
+
+        .paper-doc {
+            position: absolute;
+            bottom: 15px;
+            right: 25px;
+            width: 55px;
+            height: 70px;
+            background: white;
+            border: 2px solid #a3b1cc;
+            border-radius: 6px;
+            z-index: 2;
+            transform: rotate(10deg);
+        }
+
+        .paper-doc-front {
+            position: absolute;
+            bottom: 20px;
+            right: 35px;
+            width: 55px;
+            height: 70px;
+            background: white;
+            border: 2px solid #748aa6;
+            border-radius: 6px;
+            z-index: 3;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .star-badge {
+            width: 22px;
+            height: 22px;
+            background: #ef4f5f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            margin-bottom: 8px;
+        }
+
+        .doc-line {
+            width: 100%;
+            height: 3px;
+            background: #e0e0e0;
+            margin-bottom: 5px;
+            border-radius: 2px;
+        }
+
+        .empty-text {
+            color: #696969;
+            font-size: 16px;
+            font-weight: 400;
+        }
+    </style>
 </head>
 <body>
 
-    <section class="hero-container">
-        <div class="content-side">
-            <div class="text-wrapper">
-                <h1 class="title">ZURI: BEACHFRONT INDIAN,<br>TURKISH & THAI RESTAURANT</h1>
-                
-                <p class="description">
-                    At Hotel Orient Pearl, luxury meets taste in a seamless blend of world-class hospitality and global culinary excellence. Experience a destination where every detail is crafted to elevate your stay.
-                
-                <p class="description">
-                    Enhance your experience with our expertly crafted cocktails, perfect for unwinding as you soak in the serene beach views.
-                </p>
-                
-                <p class="description">
-                    At Hotel Orient Pearl, every moment is a celebration of flavor, culture, and the natural beauty of Phuket. Join us for an exquisite culinary journey.
-                </p>
-            </div>
-        </div>
-
-        <div class="sidevideo">
-            <video autoplay muted loop playsinline class="bg-video">
-                <source src="./Untitled design.mp4" type="video/mp4">
-            </video>
-
-            <div class="video-overlay-top">
-                <div class="social-icon">
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="logo">zomato</a>
+            <div class="search-container">
+                <div class="location-picker">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Guntur</span>
+                    <i class="fa-solid fa-caret-down" style="margin-left: auto; color: #1c1c1c;"></i>
                 </div>
-                <a href="#" class="book-btn">BOOK A TABLE</a>
-            </div>
-
-            <div class="side-icons">
-                <div class="icon-item">📞</div>
-                <div class="icon-item">💬</div>
-                <div class="icon-item">LINE</div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search for restaurant, cuisine or a dish">
+                </div>
             </div>
         </div>
-    </section>
+        <div class="nav-right">
+            <div class="profile-nav-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <span class="profile-nav-name">Srijankum...</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 12px; color: #4f4f4f;"></i>
+        </div>
+    </nav>
 
+    <header class="profile-header">
+        <div class="header-content">
+            <div class="user-info">
+                <div class="avatar-container">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <h1 class="user-name">Srijankumar</h1>
+            </div>
+            <div class="header-stats-action">
+                <button class="edit-profile-btn">
+                    <i class="fa-regular fa-pen-to-square"></i> Edit profile
+                </button>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span id="count-reviews">0</span>
+                        <label>Reviews</label>
+                    </div>
+                    <div class="stat-item">
+                        <span id="count-photos">0</span>
+                        <label>Photos</label>
+                    </div>
+                    <div class="stat-item">
+                        <span id="count-followers">0</span>
+                        <label>Followers</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Activity</h3>
+                <ul class="sidebar-menu">
+                    <li class="menu-item active" onclick="switchTab(this, 'Reviews')">Reviews</li>
+                    <li class="menu-item" onclick="switchTab(this, 'Photos')">Photos</li>
+                    <li class="menu-item" onclick="switchTab(this, 'Followers')">Followers</li>
+                    <li class="menu-item" onclick="switchTab(this, 'Recently Viewed')">Recently Viewed</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Online Ordering</h3>
+                <ul class="sidebar-menu">
+                    <li class="menu-item" onclick="switchTab(this, 'My addresses')">My addresses</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Payments</h3>
+                <ul class="sidebar-menu">
+                    <li class="menu-item" onclick="switchTab(this, 'Manage Cards')">Manage Cards</li>
+                </ul>
+            </div>
+        </aside>
+
+        <section class="content-area">
+            <h2 class="content-title" id="dynamic-title">Reviews</h2>
+            
+            <div class="empty-state">
+                <div class="empty-illustration">
+                    <div class="circle-bg"></div>
+                    <div class="coffee-cup"></div>
+                    <div class="pencil"></div>
+                    <div class="paper-doc"></div>
+                    <div class="paper-doc-front">
+                        <div class="star-badge"><i class="fa-solid fa-star"></i></div>
+                        <div class="doc-line" style="width: 80%"></div>
+                        <div class="doc-line" style="width: 60%"></div>
+                    </div>
+                </div>
+                <p class="empty-text">Nothing here yet</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function switchTab(element, tabName) {
+            // Remove active status from all items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active status to clicked element
+            element.classList.add('active');
+            
+            // Dynamically update content header
+            document.getElementById('dynamic-title').innerText = tabName;
+        }
+    </script>
 </body>
 </html>
