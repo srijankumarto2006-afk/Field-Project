@@ -35,6 +35,79 @@
     justify-content: space-around;
     
 }
+
+.user-profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    cursor:pointer;
+    position:relative;
+    margin-left:25px;
+}
+
+.user-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    margin-bottom: 25px;
+    margin-left:-20px;
+    margin-right:80px;
+   
+}
+
+#welcomeUser{
+color:rgb(28, 28, 28);
+cursor:pointer;
+display:block;
+font-family:Okra, Helvetica, sans-serif;
+font-size:16px;
+font-weight:500;
+height:20.8px;
+margin-bottom: 25px;
+margin-left:-88px;
+margin-right:45px;
+margin-top:0px;
+max-width:90px;
+text-overflow:ellipsis;
+text-wrap-mode:nowrap;
+
+}
+
+.arrow{
+    font-size:15px;
+     margin-bottom: 25px;
+     font-size:15px;
+     margin-bottom: 25px;
+     margin-left:-56px;
+    margin-right: 55px;
+}
+ #logoutBtn {
+            color: #e03546; /* Zomato Red accent for logout */
+        }
+
+.profile-menu{
+    position:absolute;
+    top:60px;
+    right:0;
+    width:130px;
+    height:200px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+    display:none;
+    overflow:hidden;
+    z-index: 999;
+}
+
+.profile-menu p{
+    padding:15px 20px;
+    margin:0;
+    cursor:pointer;
+}
+
+.profile-menu p:hover{
+    background:#f5f5f5;
+}
 .pic{
     height:90px;
     width:310px;
@@ -42,6 +115,9 @@
     margin-top:6px;
     cursor: pointer;
     
+}
+.hidden{
+    display: none !important;
 }
 .searching{
     width:45rem;
@@ -281,5 +357,273 @@ width:269px
     margin-left: 8vw;
      margin-right: 8vw;
 }
+
+/*-------------------------------------Login------------------------------------*/
+
+
+.overlay{
+    position: fixed;       /* MUST be fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;         /* full screen height */
+    background: rgba(0, 0, 0, 0.5);  /* dark overlay */
+    display: flex;/* hidden initially */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;         /* very high to cover everything */
+}
+
+
+/* LOGIN BOX */
+
+.login-box{
+width:450px;
+background:white;
+padding:25px;
+border-radius:8px;
+font:Okra Helvetica sans-serif;
+}
+
+/* HEADER */
+
+.login-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.close{
+cursor:pointer;
+font-size:20px;
+}
+
+/* PHONE INPUT */
+
+.phone-input{
+display:flex;
+border:1px solid #ddd;
+border-radius:6px;
+padding:10px;
+margin-bottom:15px;
+}
+
+.phone-input input{
+border:none;
+outline:none;
+flex:1;
+margin-left:10px;
+}
+
+/* OTP BUTTON */
+
+.otp-btn{
+width:100%;
+background:#ef4f5f;
+color:white;
+border:none;
+padding:12px;
+border-radius:6px;
+font-size:16px;
+margin-bottom:15px;
+cursor:pointer;
+}
+
+/* DIVIDER */
+
+.divider{
+text-align:center;
+margin:10px 0;
+color:#777;
+}
+
+/* EMAIL BUTTON */
+
+.email-btn{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+background:white;
+border-radius:6px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+}
+.empara{
+    font: 24px, "Google Sans",arial sans-serif;
+  
+    color:#3C4043
+}
+
+/* GOOGLE BUTTON */
+
+.google-btn{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+background:white;
+border-radius:6px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+}
+.divide{
+    margin-bottom:10px;
+}
+
+/* SIGNUP */
+
+.signup{
+text-align:center;
+font-size:14px;
+}
+
+.signup span{
+color:#ef4f5f;
+cursor:pointer;
+}
+
+/* SHOW MODAL */
+
+.overlay.show{
+visibility:visible;
+}
+/*-------------------------------------Sign Up------------------------------------*/
+.overlaysign{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.65);
+display: flex;
+
+justify-content:center;
+align-items:center;
+z-index: 9999;  
+
+}
+
+
+.signup-box{
+width:420px;
+background:white;
+padding:30px;
+border-radius:8px;
+}
+
+/* HEADER */
+
+.signup-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.close{
+cursor:pointer;
+font-size:20px;
+}
+
+/* INPUTS */
+
+.input-box{
+width:100%;
+padding:16px;
+margin-bottom:22px;
+border:1px solid #ddd;
+border-radius:6px;
+font-size:17px;
+height:48px;
+box-sizing:border-box;
+}
+
+/* TERMS */
+
+.terms{
+display:flex;
+align-items:flex-start;
+font-size:13px;
+margin-bottom:15px;
+}
+.check{
+    margin-top:14px;
+}
+.terms input{
+margin-right:8px;
+}
+
+.terms span{
+color:#ef4f5f;
+}
+
+/* CREATE BUTTON */
+
+.create-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#dcdcdc;   /* Grey by default */
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    margin-bottom:15px;
+    cursor:not-allowed;
+    transition:0.3s;
+}
+.create-btn.active{
+    background:#ef4f5f;   /* Red */
+    cursor:pointer;
+}
+
+/* DIVIDER */
+
+.divider{
+text-align:center;
+margin:10px 0;
+color:#777;
+}
+
+/* GOOGLE BUTTON */
+
+.google-btn{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+background:white;
+border-radius:6px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+}
+
+/* LOGIN TEXT */
+
+.login-text{
+margin-top:15px;
+text-align:center;
+}
+
+.login-text span{
+color:#ef4f5f;
+cursor:pointer;
+}
+
+/* SHOW POPUP */
+
+.overlaysign.show{
+display:flex;
+}
+
+
+
 
 

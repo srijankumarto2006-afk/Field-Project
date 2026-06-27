@@ -180,3 +180,22 @@ function logout(){
     location.reload();
 
 }
+
+  const checkbox = document.getElementById("agreeTerms");
+const createBtn = document.getElementById("createBtn");
+
+checkbox.addEventListener("change", function () {
+
+    if (this.checked) {
+        createBtn.classList.add("active");
+        createBtn.disabled = false;
+    } else {
+        createBtn.classList.remove("active");
+        createBtn.disabled = true;
+    }
+
+});
+
+document.getElementById("prof").addEventListener("click",()=>{
+      window.location.href = "../Delivery/profile.html";
+})

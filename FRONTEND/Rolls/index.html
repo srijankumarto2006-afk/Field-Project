@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Best Roll Delivery Restaurants in Guntur | Order Online</title>
+    <link rel="shortcut icon" href="../Landingpage/favicon.png?v=3">
     <link rel="stylesheet" href="./style.css">
      <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,14 +26,36 @@
                 <input type="text" class="searching" placeholder="Search for restaurant, cuisine or a dish   ">
                 </form>
             </div>
-
-            <div class="login Box btn">
-           <button class="button">Login</button>
+<div class="login Box btn" id="loginBox">
+           <button class="button" id="login">Login</button>
             </div>
 
-            <div class="signup Box btn">
-             <button class="button">Sign up</button>
-            </div>
+         <div class="signup Box btn" id="signupBox">
+         <button class="button" id="sign">Sign up</button>
+         </div>
+             <div class="user-profile hidden" id="userBox">
+
+    <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A" alt="User" class="user-icon">
+
+    <span id="welcomeUser"></span>
+
+    <span class="arrow">&#9662;</span>
+
+    <div class="profile-menu" id="profileMenu">
+
+        <p id="prof">Profile</p>
+        <p>Reviews</p>
+        <p>Settings</p>
+
+        <hr>
+
+        <p id="logoutBtn">Log out</p>
+
+    </div>
+
+</div>
+
+
 
         </div>
          <div class="project">
@@ -594,6 +617,93 @@
      </div>
     </div>
     </div>
+    <!-------------------------- LOGIN MODAL--------------------- -->
     
+      <div class="overlay hidden" id="lay">
+
+    
+    <div class="login-box"   >
+
+        <div class="login-header">
+            <h2>Login</h2>
+            <span class="close" id="loginclose">✕</span>
+        </div>
+
+      
+
+        <input type="email" id="loginEmail" placeholder="Enter Email" class="input-box">
+<input type="password" id="loginPassword" placeholder="Enter Password" class="input-box">
+
+<button class="otp-btn" onclick="loginUser()">Login with Email</button>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+        <div class="divide">
+        <button class="email-btn">
+             <img src="https://img.icons8.com/color/48/gmail-new.png" width="20">  <p class="empara">Continue with Email</p>
+        </button>
+        </div>
+      
+       
+<div class="divide">
+        <button class="google-btn" onclick="googleLogin()">
+    <img src="https://img.icons8.com/color/48/google-logo.png" width="20">  
+    <p class="empara">Sign in with Google</p>
+</button>
+</div>
+
+        <p class="signup">
+            New to Hotel Orient Pearl ? <span onclick="openSignup()" id="create">Create account</span>
+        </p>
+
+    </div>
+</div>
+
+ <!-------------------------- Signup MODAL--------------------- -->
+
+<div class="overlaysign hidden" id="overfull">
+
+    <div class="signup-box">
+
+        <div class="signup-header">
+            <h2>Sign up</h2>
+            <span class="close" id="signclose" onclick="closeSignup()">✕</span>
+        </div>
+
+        <input type="text" id="signupName" placeholder="Full Name" class="input-box">
+
+<input type="email" id="signupEmail" placeholder="Email" class="input-box">
+
+<input type="password" id="signupPassword" placeholder="Password" class="input-box">
+
+        <div class="terms">
+            <input type="checkbox" class="check"id="agreeTerms">
+            <p>I agree to Hotel Orient Peral's 
+            <span>Terms of Service</span>, 
+            <span>Privacy Policy</span> and 
+            <span>Content Policies</span>
+            </p>
+        </div>
+
+        <button class="create-btn"  id="createBtn" onclick="signupUser()"disabled>Create account</button>
+
+        <div class="divider">or</div>
+
+        <button class="google-btn" onclick="googleLogin()">
+    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" width="20px">
+    Sign in with Google
+</button>
+
+        <div class="login-text">
+            Already have an account? <span onclick="openLogin()" id="newlogin">Log in</span>
+        </div>
+
+    </div>
+
+
+
+</div>
+    <script src="./script.js"></script>
 </body>
 </html>

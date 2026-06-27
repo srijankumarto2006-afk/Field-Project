@@ -209,7 +209,7 @@ const restaurants=[
     "outdoor_seating": true
   },
   {
-    "image": "http://127.0.0.1:5500/Cake/girl.avif",
+    "image": "https://b.zmtcdn.com/data/dish_photos/c99/4e6a434f974f55af107245eaf5444c99.jpg",
     "names": "Dessert's House",
     "rating": "4.3",
     "foodtypes": "Desserts, Bakery",
@@ -1982,3 +1982,7 @@ checkbox.addEventListener("change", function () {
     }
 
 });
+
+document.getElementById("prof").addEventListener("click",()=>{
+      window.location.href = "../Delivery/profile.html";
+})

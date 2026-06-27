@@ -252,6 +252,9 @@ text-wrap-mode:nowrap;
      margin-left:-56px;
     margin-right: 55px;
 }
+ #logoutBtn {
+            color: #e03546; /* Zomato Red accent for logout */
+        }
 
 .profile-menu{
     position:absolute;
@@ -264,6 +267,7 @@ text-wrap-mode:nowrap;
     box-shadow:0 5px 20px rgba(0,0,0,.15);
     display:none;
     overflow:hidden;
+    z-index: 999;
 }
 
 .profile-menu p{
@@ -842,14 +846,20 @@ color:#ef4f5f;
 /* CREATE BUTTON */
 
 .create-btn{
-width:100%;
-padding:12px;
-border:none;
-background:#dcdcdc;
-color:white;
-border-radius:6px;
-font-size:16px;
-margin-bottom:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#dcdcdc;   /* Grey by default */
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    margin-bottom:15px;
+    cursor:not-allowed;
+    transition:0.3s;
+}
+.create-btn.active{
+    background:#ef4f5f;   /* Red */
+    cursor:pointer;
 }
 
 /* DIVIDER */

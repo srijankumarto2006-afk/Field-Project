@@ -1,8 +1,69 @@
-console.log("JS LOADED");
-document.querySelectorAll(".card").forEach(card => {
-  card.addEventListener("click", () => {
-    window.location.href = card.getAttribute("data-link");
-  });
+// Hardcoded Backend Base URL
+const BACKEND_URL = "http://127.0.0.1:5051/api/auth";
+
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Get user data from local storage safely
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+    // 2. Fetch DOM elements safely
+    const loginBox = document.getElementById("loginBox");
+    const signupBox = document.getElementById("signupBox");
+    const userBox = document.getElementById("userBox");
+    const welcomeUser = document.getElementById("welcomeUser");
+    const profileMenu = document.getElementById("profileMenu");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const profBtn = document.getElementById("prof");
+
+    // 3. UI State updates based on authentication
+    if (user) {
+        if (loginBox) loginBox.style.display = "none";
+        if (signupBox) signupBox.style.display = "none";
+        
+        if (userBox) {
+            userBox.classList.remove("hidden");
+            userBox.style.setProperty("display", "flex", "important"); 
+        }
+        if (welcomeUser) {
+            welcomeUser.textContent = user.name;
+        }
+    } else {
+        // If no user is logged in, reset back to login states
+        if (userBox) userBox.style.display = "none";
+        if (loginBox) loginBox.style.display = "flex";
+        if (signupBox) signupBox.style.display = "flex";
+    }
+
+    // 4. Profile Dropdown Menu Toggling
+    if (userBox && profileMenu) {
+        userBox.addEventListener("click", function (e) {
+            e.stopPropagation();
+            profileMenu.style.display = profileMenu.style.display === "block" ? "none" : "block";
+        });
+
+        // Close menu clicking anywhere else on document
+        document.addEventListener("click", function () {
+            profileMenu.style.display = "none";
+        });
+    }
+
+    // 5. Profile Redirection Handler
+    if (profBtn) {
+        profBtn.addEventListener("click", () => {
+            window.location.href = "/FRONTEND/Delivery/profile.html";
+        });
+    }
+
+    // 6. Logout Execution & Redirect to Delivery Home
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            // Clear user data completely from browser storage
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            // Redirect smoothly back to the main delivery index page
+            window.location.href = "/FRONTEND/Delivery/index.html";
+        });
+    }
 });
 
 // Close Login Modal
@@ -37,12 +98,7 @@ document.getElementById("newlogin").addEventListener("click", () => {
    document.getElementById("lay").classList.remove("hidden"); // Shows signup
 });
 
-// // ---------------------------------------------------------------backend  code------------------------------------------
-
-    // Hardcoded to port 6000 so it NEVER looks for port 5051 again
-    const BACKEND_URL = "http://127.0.0.1:5051/api/auth";
-
-    async function signupUser() {
+async function signupUser() {
         if (window.event) window.event.preventDefault();
 
         const nameEl = document.getElementById("signupName");
@@ -133,55 +189,7 @@ async function loginUser() {
     }
 
 }
-
-
-
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if(user){
-
-        document.getElementById("loginBox").classList.add("hidden");
-        document.getElementById("signupBox").classList.add("hidden");
-        document.getElementById("userBox").classList.remove("hidden");
-
-        document.getElementById("welcomeUser").textContent = user.name;
-
-    }
-
-});
-const userBox = document.getElementById("userBox");
-const profileMenu = document.getElementById("profileMenu");
-
-userBox.addEventListener("click", function (e) {
-
-    e.stopPropagation();
-
-    profileMenu.style.display =
-        profileMenu.style.display === "block" ? "none" : "block";
-
-});
-
-
-document.addEventListener("click", function () {
-
-    profileMenu.style.display = "none";
-
-});
-document.getElementById("logoutBtn").addEventListener("click", logout);
-
-function logout(){
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    location.reload();
-
-}
-
-  const checkbox = document.getElementById("agreeTerms");
+const checkbox = document.getElementById("agreeTerms");
 const createBtn = document.getElementById("createBtn");
 
 checkbox.addEventListener("change", function () {
@@ -195,7 +203,6 @@ checkbox.addEventListener("change", function () {
     }
 
 });
-document.getElementById("prof").addEventListener("click", () => {
-    // 🚀 Force the browser to ALWAYS go to the Delivery folder where your layout lives
-    window.location.href = "/FRONTEND/Delivery/profile.html";
-});
+
+
+

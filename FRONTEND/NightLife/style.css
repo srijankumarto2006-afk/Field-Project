@@ -155,7 +155,9 @@ text-wrap-mode:nowrap;
      margin-left:-56px;
     margin-right: 55px;
 }
-
+ #logoutBtn {
+            color: #e03546; /* Zomato Red accent for logout */
+        }
 .profile-menu{
     position:absolute;
     top:60px;
@@ -167,6 +169,7 @@ text-wrap-mode:nowrap;
     box-shadow:0 5px 20px rgba(0,0,0,.15);
     display:none;
     overflow:hidden;
+     z-index:999;
 }
 
 .profile-menu p{
