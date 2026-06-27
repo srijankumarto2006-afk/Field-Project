@@ -206,3 +206,38 @@ checkbox.addEventListener("change", function () {
 
 
 
+// Get DOM elements
+const passwordInput = document.getElementById('signupPassword');
+const agreeCheckbox = document.getElementById('agreeTerms');
+const createButton = document.getElementById('createBtn');
+
+// Add event listeners to validate in real-time
+passwordInput.addEventListener('input', validateForm);
+agreeCheckbox.addEventListener('change', validateForm);
+
+function isPasswordStrong(password) {
+    // Criteria: Min 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return strongPasswordRegex.test(password);
+}
+
+function validateForm() {
+    const password = passwordInput.value;
+    const isPasswordValid = isPasswordStrong(password);
+    const isCheckboxChecked = agreeCheckbox.checked;
+    const reqMessage = document.getElementById('password-requirements');
+
+    // Provide visual feedback for the password
+    if (password === "") {
+        reqMessage.textContent = "";
+    } else if (!isPasswordValid) {
+        reqMessage.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
+        reqMessage.style.color = "#ff4d4d";
+    } else {
+        reqMessage.textContent = "Strong password! ✓";
+        reqMessage.style.color = "#2ecc71";
+    }
+
+    // Toggle button
+    createButton.disabled = !(isPasswordValid && isCheckboxChecked);
+}

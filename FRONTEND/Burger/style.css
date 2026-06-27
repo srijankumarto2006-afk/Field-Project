@@ -623,6 +623,12 @@ cursor:pointer;
 .overlaysign.show{
 display:flex;
 }
-
+.error-msg {
+    font-size: 11px;
+    color: #ff4d4d;
+    text-align: left;
+    margin: -8px 0 10px 5px; /* Aligns neatly right under the input boxes */
+    min-height: 15px; /* Prevents the layout from shifting drastically */
+}
 
 

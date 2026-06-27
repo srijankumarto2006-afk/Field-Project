@@ -206,3 +206,43 @@ checkbox.addEventListener("change", function () {
 
 
 
+// 1. Get DOM Elements
+const nameInput = document.getElementById('signupName');
+const emailInput = document.getElementById('signupEmail');
+const passwordInput = document.getElementById('signupPassword');
+const agreeCheckbox = document.getElementById('agreeTerms');
+const createButton = document.getElementById('createBtn');
+
+// 2. Attach Real-Time Event Listeners
+nameInput.addEventListener('input', validateForm);
+emailInput.addEventListener('input', validateForm);
+passwordInput.addEventListener('input', validateForm);
+agreeCheckbox.addEventListener('change', validateForm);
+
+// 3. Validation Core Logic
+function validateForm() {
+    // A. Name Check: Must not be blank and at least 2 characters
+    const isNameValid = nameInput.value.trim().length >= 2;
+
+    // B. Gmail Check: Ensures it ends specifically with @gmail.com
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    const isEmailValid = gmailRegex.test(emailInput.value.trim());
+
+    // C. Strong Password Check: 8+ chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const isPasswordValid = passwordRegex.test(passwordInput.value);
+
+    // D. Checkbox Check
+    const isCheckboxChecked = agreeCheckbox.checked;
+
+    // 4. Master Switch: Enable button only if EVERYTHING passes
+    if (isNameValid && isEmailValid && isPasswordValid && isCheckboxChecked) {
+        createButton.disabled = false;
+        createButton.style.opacity = "1"; // Optional: Makes button look clickable
+        createButton.style.cursor = "pointer";
+    } else {
+        createButton.disabled = true;
+        createButton.style.opacity = "0.6"; // Optional: Makes button look disabled
+        createButton.style.cursor = "not-allowed";
+    }
+}
