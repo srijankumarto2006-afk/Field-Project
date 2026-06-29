@@ -235,3 +235,70 @@ function validateForm() {
     // Toggle button
     createButton.disabled = !(isPasswordValid && isCheckboxChecked);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("SlideTrack");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const items = document.querySelectorAll(".rec");
+
+  if (!track || items.length === 0) return;
+
+  let currentIndex = 0;
+
+  // Calculate the exact width of one item including its margins
+  function getItemStep() {
+    const style = window.getComputedStyle(items[0]);
+    const marginRight = parseFloat(style.marginRight) || 0;
+    const marginLeft = parseFloat(style.marginLeft) || 0;
+    return items[0].getBoundingClientRect().width + marginRight + marginLeft;
+  }
+
+  // Calculate how many total steps the slider can take before hitting the end
+  function getMaxIndex() {
+    const containerWidth = track.parentElement.clientWidth;
+    const itemWidth = getItemStep();
+    const visibleItems = Math.floor(containerWidth / itemWidth) || 1;
+    return items.length - visibleItems;
+  }
+
+  function updateSlider() {
+    const step = getItemStep();
+    const maxIndex = getMaxIndex();
+
+    // Bound check to prevent over-scrolling
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+    if (currentIndex < 0) currentIndex = 0;
+
+    // Shift the track
+    const amountToMove = currentIndex * step;
+    track.style.transform = `translateX(-${amountToMove}px)`;
+
+    // Toggle button disabled states visually and functionally
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex >= maxIndex;
+  }
+
+  // Next Button Click
+  nextBtn.addEventListener("click", () => {
+    const maxIndex = getMaxIndex();
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+      updateSlider();
+    }
+  });
+
+  // Previous Button Click
+  prevBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlider();
+    }
+  });
+
+  // Keep slider positioning accurate if the user resizes their screen
+  window.addEventListener("resize", updateSlider);
+  
+  // Initialize button states on load
+  updateSlider();
+});

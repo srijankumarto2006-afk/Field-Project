@@ -64,31 +64,43 @@
         </div>
     </section>
 
-    <section class="ambiance-gallery">
+  <section class="ambiance-gallery">
     <h2 class="gallery-title">EXPERIENCE THE BEACHSIDE AMBIANCE AT HOTEL ORIENT PEARL</h2>
 
     <div class="gallery-grid">
         <!-- Outdoor Column -->
         <div class="gallery-item">
-            <div class="slider-container">
+            <div class="slider-container" slider-index="0">
                 <button class="arrow prev" onclick="moveSlider(this, -1)">&#10094;</button>
                 <div class="slider-window">
-                    <img src="./out3.jpeg" alt="Outdoor Seating" class="active">
-                 
+                    <!-- Images are grouped inside a track element to slide horizontally -->
+                    <div class="slider-track">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/outdoor-007.jpeg" alt="Outdoor Seating 1">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/outdoor-006.jpeg" alt="Outdoor Seating 2">
+                       <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/outdoor-001.jpeg" alt="Outdoor Seating 3">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/outsoor-003.jpeg" alt="Outdoor Seating 4">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/outdoor-005.jpeg" alt="Outdoor Seating 5">
+                    </div>
                 </div>
                 <button class="arrow next" onclick="moveSlider(this, 1)">&#10095;</button>
             </div>
-
-            
             <p class="caption">Outdoor</p>
         </div>
 
         <!-- Indoor Column -->
         <div class="gallery-item">
-            <div class="slider-container">
+            <div class="slider-container" slider-index="0">
                 <button class="arrow prev" onclick="moveSlider(this, -1)">&#10094;</button>
                 <div class="slider-window">
-                    <img src="./in1.jpeg" alt="Indoor Seating" class="active">
+                    <div class="slider-track">
+                        <img src="./in1.jpeg" alt="Indoor Seating 1">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/indoor-001.jpeg" alt="Indoor Seating 2">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/indoor-005.jpg" alt="Indoor Seating 3">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/indoor-004.jpg" alt="Indoor Seating 4">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/indoor-003-new.jpeg" alt="Indoor Seating 4">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/indoor-004.jpg" alt="Indoor Seating 4">
+                        
+                    </div>
                 </div>
                 <button class="arrow next" onclick="moveSlider(this, 1)">&#10095;</button>
             </div>
@@ -97,10 +109,17 @@
 
         <!-- Bar Column -->
         <div class="gallery-item">
-            <div class="slider-container">
+            <div class="slider-container" slider-index="0">
                 <button class="arrow prev" onclick="moveSlider(this, -1)">&#10094;</button>
                 <div class="slider-window">
-                    <img src="./bar2.jpeg" alt="Bar Area" class="active">
+                    <div class="slider-track">
+                        <img src="./bar2.jpeg" alt="Bar Area 1">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/bar-001-new.jpeg" alt="Bar Area 2">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/bar-003-new.jpeg" alt="Bar Area 3">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/bar-004-new.jpeg" alt="Bar Area 4">
+                        <img src="https://zurirestaurant.com/wp-content/uploads/2025/01/bar-001-new.jpeg" alt="Bar Area 5">
+                       
+                    </div>
                 </div>
                 <button class="arrow next" onclick="moveSlider(this, 1)">&#10095;</button>
             </div>
@@ -108,7 +127,6 @@
         </div>
     </div>
 </section>
-
 
 <section class="hero-container">
         

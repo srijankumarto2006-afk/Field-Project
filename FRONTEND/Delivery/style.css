@@ -578,9 +578,7 @@ body {
 .ind{
     margin-right:0.9rem;
 }
-.receipe{
-    margin:0.5rem;
-}
+
 .pizza{
    background-color: rgba(239, 9, 9, 0.93);
 }
@@ -603,8 +601,27 @@ body {
     margin-left: 13vw;
      margin-right: 13vw;
 }
+.receipe{
+    margin:0.5rem;
+}
+.rec{
+   margin: 0.5rem;
+  /* Prevent cards from shrinking/squeezing together */
+  flex: 0 0 auto
+}
 .slider{
     overflow: hidden;
+}
+.sliderssss {
+  overflow: hidden;
+  width: 100%;
+}
+.slidessss-track {
+  will-change: transform;
+  display: flex;
+  width: max-content;
+  /* Smooth transition effect when transform changes via JS */
+  transition: transform 0.4s ease-in-out; 
 }
 .slide-track {
     will-change: transform;
@@ -904,3 +921,46 @@ display:flex;
 }
 
 
+/*/* Navigation Buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: #f7f7f7;
+        }
+
+        /* Disabled State styling */
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .prev-btn {
+            left: -10px;
+        }
+
+        .next-btn {
+            right: -10px;
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #111010;
+        }

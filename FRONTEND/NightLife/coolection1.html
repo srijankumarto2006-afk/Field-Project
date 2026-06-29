@@ -3,58 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="kri.css">
+    <title>Food Carousel Slider - Strict Boundaries</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container Section */
+        .inspiration-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .heading {
+            font-size: 26px;
+            font-weight: 500;
+            color: #1c1c1c;
+            margin-bottom: 25px;
+            padding-left: 10px;
+        }
+
+        /* Slider Window */
+        .slider-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 28px;
+            transition: transform 0.4s ease-in-out;
+            list-style: none;
+        }
+
+        /* Individual Food Card */
+        .food-item {
+            flex: 0 0 calc((100% - (28px * 5)) / 6); /* Fits 6 items perfectly */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .image-wrapper {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .food-item:hover .image-wrapper {
+            transform: scale(1.05);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .food-item span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #363636;
+            margin-top: 4px;
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            position: absolute;
+            top: 38%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: #f7f7f7;
+        }
+
+        /* Disabled State styling */
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .prev-btn {
+            left: -10px;
+        }
+
+        .next-btn {
+            right: -10px;
+        }
+
+        .nav-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #666666;
+        }
+    </style>
 </head>
 <body>
-    <div class="famous">
-        <div class="c1">
-            <p>Collections</p>
-        </div>
-        <div class="know">
-            <p>Explore curated lists of top restaurants, cafes, pubs, and bars across the globe—crafted from the world’s most exciting food and nightlife trends.</p>
-        </div>
-        <div class="pictures">
-        <div class="pic1 Box">
-            <img src="./bar.avif" alt="hotelpic" class="img1">
-            <div class="trend">
-            <div class="para1">Top Trending Spots</div>
-            <div class="pa2">38 places &#9654;</div>
-            </div>
-        </div>
-        <div class="pic3 Box">
-            <img src="./BEST.webp" alt="hotelpic"class="img3">
-            <div class="arend">
-            <div class="para1">Romantic Dining Places</div>
-            <div class="pa2">29 places &#9654;</div>
-            </div>
-        </div>
-        <div class="pic2 Box">
-            <img src="./DABI.webp" alt="hotelpic"class="img2">
-            <div class="brend">
-            <div class="para1">Best Pubs and Bars</div>
-            <div class="pa2">38 places &#9654;</div>
-            </div>
-        </div>
-        <div class="pic4 Box">
-            <img src="./ambiance.jpg" alt="hotelpic"class="img4">
-            <div class="crend">
-            <div class="para1">Rooftop|City View Dining</div>
-            <div class="pa2">38 places &#9654;</div>
-            </div>
-        </div>
-        <div class="pic5 Box">
-            <img src="./GREEN.webp" alt="hotelpic" class="img5">
-            <div class="drend">
-            <div class="para1">Places for Vigan Treats</div>
-            <div class="pa2">38 places &#9654;</div>
-            </div>
-        </div>
-        </div>
 
+    <div class="inspiration-container">
+        <h2 class="heading">Inspiration for your first order</h2>
+        
+        <div class="slider-wrapper">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </button>
 
+            <div class="carousel-track-container">
+                <ul class="carousel-track" id="carouselTrack">
+                    
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&auto=format&fit=crop&q=80" alt="Pizza">
+                        </div>
+                        <span>Pizza</span>
+                    </li>
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=300&auto=format&fit=crop&q=80" alt="Chicken">
+                        </div>
+                        <span>Chicken</span>
+                    </li>
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=300&auto=format&fit=crop&q=80" alt="Fried Rice">
+                        </div>
+                        <span>Fried Rice</span>
+                    </li>
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&auto=format&fit=crop&q=80" alt="Burger">
+                        </div>
+                        <span>Burger</span>
+                    </li>
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&auto=format&fit=crop&q=80" alt="Cake">
+                        </div>
+                        <span>Cake</span>
+                    </li>
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300&auto=format&fit=crop&q=80" alt="Veg Meal">
+                        </div>
+                        <span>Veg Meal</span>
+                    </li>
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&auto=format&fit=crop&q=80" alt="Paneer">
+                        </div>
+                        <span>Paneer Tikka</span>
+                    </li>
+                    <li class="food-item">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=300&auto=format&fit=crop&q=80" alt="Donut">
+                        </div>
+                        <span>Desserts</span>
+                    </li>
+                </ul>
+            </div>
 
+            <button class="nav-btn next-btn" id="nextBtn">
+                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </button>
+        </div>
     </div>
-    
+
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        const items = Array.from(track.children);
+        
+        let currentIndex = 0;
+        const maxVisibleItems = 6; // Total view slots visible at once
+
+        // Calculate transition step size (element width + gap)
+        function getSlideAmount() {
+            const itemWidth = items[0].getBoundingClientRect().width;
+            const gap = 28; 
+            return itemWidth + gap;
+        }
+
+        // Updates position and monitors the state of buttons
+        function updateSlider() {
+            // 1. Move Track
+            const moveAmount = getSlideAmount() * currentIndex;
+            track.style.transform = `translateX(-${moveAmount}px)`;
+
+            // 2. Handle Previous Button state
+            if (currentIndex === 0) {
+                prevButton.disabled = true;
+            } else {
+                prevButton.disabled = false;
+            }
+
+            // 3. Handle Next Button state (disables when the last item enters view)
+            if (currentIndex >= items.length - maxVisibleItems) {
+                nextButton.disabled = true;
+            } else {
+                nextButton.disabled = false;
+            }
+        }
+
+        // Next Click Event
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < items.length - maxVisibleItems) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        // Prev Click Event
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // Initialize state on load
+        updateSlider();
+
+        // Adjust seamlessly if screen sizes recalculate
+        window.addEventListener('resize', updateSlider);
+    </script>
 </body>
 </html>
