@@ -1690,3 +1690,80 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+      // --- 1. Dynamic Profile Name Syncing & Access Control ---
+       // --- 1. Dynamic Profile Name Syncing & Access Control ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const userData = localStorage.getItem("user");
+
+            if (userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    
+                    const welcomeUser = document.getElementById('welcomeUser');
+                    if (welcomeUser) welcomeUser.textContent = user.name;
+
+                    const mainUserNameElement = document.querySelector('.user-name');
+                    if (mainUserNameElement) mainUserNameElement.textContent = user.name;
+                    
+                    document.title = `${user.name} - Zomato Profile Clone`;
+                } catch (e) {
+                    console.error("Error parsing user data from localStorage:", e);
+                }
+            } else {
+                alert("Please log in first!");
+                // 🚀 If authorization fails, send them back to the DiningOut homepage safely
+                window.location.href = "/FRONTEND/DiningOut/newindex.html";
+            }
+        });
+
+        // --- 3. Dropdown Menu Toggle Logic ---
+        const navProfileTrigger = document.getElementById('navProfileTrigger');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (navProfileTrigger && profileMenu) {
+            // Toggle dropdown display state when user clicks profile block
+            navProfileTrigger.addEventListener('click', function(event) {
+                event.stopPropagation(); // Stops instant close trigger from window listener below
+                
+                if (profileMenu.classList.contains('show') || profileMenu.style.display === "block") {
+                    profileMenu.classList.remove('show');
+                    profileMenu.style.display = "none";
+                } else {
+                    profileMenu.classList.add('show');
+                    profileMenu.style.display = "block";
+                }
+            });
+
+            // Close dropdown container instantly if user clicks anywhere else on screen
+            window.addEventListener('click', function() {
+                profileMenu.classList.remove('show');
+                profileMenu.style.display = "none";
+            });
+        }
+
+        // --- 4. Logout Action Processor ---
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(event) {
+                event.stopPropagation(); // Clear event bubble space
+                
+                // Clear authorization tokens
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                
+                // Step back out of Delivery folder, straight into DiningOut/newindex.html
+                window.location.href = '../DiningOut/newindex.html'; 
+            });
+        } else {
+            // Fallback warning log if the logout button element is missing from the DOM
+            console.warn("⚠️ Warning: Could not find 'logoutBtn' element in the HTML layout.");
+        }
+    
+    const profBtn = document.getElementById("prof");
+    if (profBtn) {
+        profBtn.addEventListener("click", () => {
+            window.location.href = "/FRONTEND/Delivery/profile.html";
+        });
+    }
