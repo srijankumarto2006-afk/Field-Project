@@ -1,4 +1,6 @@
-const restaurants=[
+
+        // Synchronized Master Restaurant Dataset List matching your main app configuration
+   const restaurants=[
   
   {
     "image": "https://b.zmtcdn.com/data/pictures/3/22295613/aade5a7026490f1cdc60f7f5dc094f78_featured_v2.jpg?output-format=webp",
@@ -1607,476 +1609,84 @@ const restaurants=[
     "outdoor_seating": true
   }
 ]
-function getrestaurant(restaurants) {
-  const root = document.getElementById("root");
-  root.innerHTML = "";
 
-  // 1. CRITICAL FIX: Create ONE grid container OUTSIDE the loop
-  const gridContainer = document.createElement("div");
-  // We give it 'project' for your site margins, and 'restaurant-grid' to activate flexbox rows
-  gridContainer.classList.add("project", "restaurant-grid"); 
+       // Wrap EVERYTHING that handles reading parameters and DOM injection inside this listener
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const resId = urlParams.get('id');
 
+    if (resId !== null && restaurants[resId]) {
+        const data = restaurants[resId];
 
-  restaurants.forEach(restaurant => {
-    // Create a card
-    const card = document.createElement("div");
-    card.classList.add("card");
-   
-    
-    // 1. Image (discount)
-    const imageContainer = document.createElement("div");
-    imageContainer.classList.add("image");
+        // Core Profile text nodes initializations
+        document.getElementById('res-name').innerText = data.names;
+        document.getElementById('res-cuisine').innerText = data.foodtypes;
+        document.getElementById('res-address').innerText = `${data.location}, India`;
+        document.getElementById('menu-title').innerText = `${data.names} Menu`;
+        document.getElementById('res-price').innerText = `₹${data["price_for-two"]} for two`;
 
-    const img = document.createElement("img");
-    img.src = restaurant.image;
-    img.classList.add("img");
-    imageContainer.appendChild(img);
+        // Display values inside the rating widgets
+        document.getElementById('res-dining-rating').innerText = `${data.rating} ★`;
+        const calculatedDelivery = (parseFloat(data.rating) + 0.1).toFixed(1);
+        document.getElementById('res-delivery-rating').innerText = `${calculatedDelivery} ★`;
 
-    // Only show the discount tag if there actually is an offer!
-    if (restaurant.offers && restaurant.offers !== "No Offer") {
-      const discount = document.createElement("div");
-      discount.classList.add("off");
-      discount.textContent = restaurant.offers;
-      imageContainer.appendChild(discount);
-    }
-
-    // 2. Card Content
-    // i. Card header (name and rating)
-    const rest = document.createElement("div");
-    rest.classList.add("rest");
-
-    const restname = document.createElement("p");
-    restname.textContent = restaurant.names;
-    restname.classList.add("hotelname");
-
-    const rate = document.createElement("span");
-    rate.textContent = restaurant.rating + " ★";
-    rate.classList.add("rate");
-    
-    rest.appendChild(restname);
-    rest.appendChild(rate);
-
-    // ii. Card body (food type and price)
-    // Wrap this in a relative div so absolute children (.price) position correctly
-    const dish = document.createElement("div");
-    dish.classList.add("dish");
-    dish.style.position = "relative"; 
-    dish.style.height = "30px"; 
-
-    const food = document.createElement("p");
-    food.textContent = restaurant.foodtypes;
-    food.classList.add("type");
-
-    const price = document.createElement("span");
-    // Standardized key name to match standard array data formatting
-    price.textContent = "₹" + (restaurant["price_for-two"] || restaurant["price_for_two"]) + " for two";
-    price.classList.add("price");
-    
-    dish.appendChild(food);
-    dish.appendChild(price);
-
-    // iii. Card location & distance
-    const min = document.createElement("div");
-    min.classList.add("min");
-
-    // Uncommented and added location styling so it matches your target image
-    const loc = document.createElement("span");
-    loc.textContent = restaurant.location || "";
-    loc.style.color = "grey";
-    loc.style.fontSize = "14px";
-
-    const distance = document.createElement("span");
-    distance.textContent = restaurant.distance;
-    distance.classList.add("distance");
-    
-    min.appendChild(loc);
-    min.appendChild(distance);
-
-    // Assembly: Add everything to the card
-    card.appendChild(imageContainer);
-    card.appendChild(rest);
-    card.appendChild(dish);
-    card.appendChild(min);
-     const originalIndex = restaurants.indexOf(restaurant);
-     card.addEventListener('click', () => {
-        goToDetails(originalIndex);})
-    // 2. CRITICAL FIX: Append the card directly to the shared gridContainer
-    
-    gridContainer.appendChild(card);
-  });
-
-  // 3. CRITICAL FIX: Push the fully loaded grid container into the root element
-  root.appendChild(gridContainer);
-}
-
-// Execute the renderer
-getrestaurant(restaurants);
-
-document.getElementById("Alcohol").addEventListener("click",()=>{
-  const result=restaurants.filter((obj)=>obj.alcohol)
-  document.getElementById("root").innerHTML="";
-  getrestaurant(result);
-})
-
-document.getElementById("out").addEventListener("click",()=>{
-  const result=restaurants.filter((obj)=>obj.outdoor_seating)
-  document.getElementById("root").innerHTML="";
-  getrestaurant(result);
-})
-document.getElementById("Pet").addEventListener("click",()=>{
-  const result=restaurants.filter((obj)=>obj.pet_friendly)
-  document.getElementById("root").innerHTML="";
-  getrestaurant(result);
-})
-
-document.getElementById("offers").addEventListener("click",()=>{
-  const result=restaurants.filter((obj)=>obj["offer-status"])
-  document.getElementById("root").innerHTML="";
-  getrestaurant(result);
-})
-
-
-document.getElementById("Rating").addEventListener("click",()=>{
-  const result=restaurants.filter((obj)=>obj.rating>=4.5)
-  document.getElementById("root").innerHTML="";
-  getrestaurant(result);
-})
-
-
-
-
-document.getElementById("filter").addEventListener("click",()=>{
-   document.getElementById("filterModal").classList.remove("hidden")
-})
-
-
-
-
-
-document.getElementById("close").addEventListener("click",()=>{
-   document.getElementById("filterModal").classList.add("hidden")
-})
-
-
-
-
-document.getElementById("applyBtn").addEventListener("click",()=>{
-  const element=document.querySelector('input[name="sort-option"]:checked')
-  const answer=element.value;
-
-  if(answer=="Rating: High to Low"){
-    restaurants.sort((a,b)=>b.rating-a.rating);
-  }
-  else if(answer=="Cost: Low to High"){
-    restaurants.sort((a,b)=>a["price_for-two"]-b["price_for-two"]);
-  }
-   else if(answer=="Cost: High to Low"){
-    restaurants.sort((a,b)=>b["price_for-two"]-a["price_for-two"]);
-  }
-  else if(answer=="Distance"){
-    restaurants.sort(
-  (a, b) => parseFloat(a.distance) - parseFloat(b.distance)
-);
-  }
-   document.getElementById("root").innerHTML="";
-    document.getElementById("filterModal").classList.add("hidden")
-  getrestaurant(restaurants);
-})
-
-// document.getElementById("clearBtn").addEventListener("click",()=>{
-//  document.getElementById("root").innerHTML="";
-//  document.getElementById("filterModal").classList.add("hidden")
-//  getrestaurant(restaurants);
-
-// })
-// Close Login Modal
-document.getElementById("loginclose").addEventListener("click", () => {
-   document.getElementById("lay").classList.add("hidden");
-});
-
-// Close Signup Modal
-document.getElementById("signclose").addEventListener("click", () => {
-   document.getElementById("overfull").classList.add("hidden");
-});
-
-// Open Login Modal
-document.getElementById("login").addEventListener("click", () => {
-   document.getElementById("lay").classList.remove("hidden");
-});
-
-// Open Signup Modal
-document.getElementById("sign").addEventListener("click", () => {
-   document.getElementById("overfull").classList.remove("hidden");
-});
-
-// Switch from Login Modal to Signup Modal
-// Replace "create" with the actual ID of your "Create account" button text link
-document.getElementById("create").addEventListener("click", () => {
-   document.getElementById("lay").classList.add("hidden");      // Hides login safely
-   document.getElementById("overfull").classList.remove("hidden"); // Shows signup
-});
-
-document.getElementById("newlogin").addEventListener("click", () => {
-   document.getElementById("overfull").classList.add("hidden");      // Hides login safely
-   document.getElementById("lay").classList.remove("hidden"); // Shows signup
-});
-
-
-
-
-// // ---------------------------------------------------------------backend  code------------------------------------------
-
-    // Hardcoded to port 6000 so it NEVER looks for port 5051 again
-    const BACKEND_URL = "http://127.0.0.1:5051/api/auth";
-
-    async function signupUser() {
-        if (window.event) window.event.preventDefault();
-
-        const nameEl = document.getElementById("signupName");
-        const emailEl = document.getElementById("signupEmail");
-        const passwordEl = document.getElementById("signupPassword");
-
-        if (!nameEl || !emailEl || !passwordEl) {
-            alert("❌ Frontend Error: Input fields missing in HTML.");
-            return;
+        // Operational Hours Check
+        const currentHour = new Date().getHours();
+        let isOpen = false;
+        if (data["res-open_time"] < data["res-close_time"]) {
+            isOpen = currentHour >= data["res-open_time"] && currentHour < data["res-close_time"];
+        } else {
+            isOpen = currentHour >= data["res-open_time"] || currentHour < data["res-close_time"];
         }
 
-        const name = nameEl.value.trim();
-        const email = emailEl.value.trim();
-        const password = passwordEl.value.trim();
-
-        if (!name || !email || !password) {
-            alert("⚠️ Please fill out all fields.");
-            return;
-        }
-
-        try {
-            const response = await fetch(`${BACKEND_URL}/signup`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                alert("🎉 Account Created Successfully! Please login.");
-                nameEl.value = "";
-                emailEl.value = "";
-                passwordEl.value = "";
-                if (typeof closeSignup === "function") closeSignup();
-                if (typeof openLogin === "function") openLogin();
+        const statusEl = document.getElementById('res-status');
+        if (statusEl) {
+            if (isOpen) {
+                statusEl.innerText = "Open Now";
+                statusEl.className = "open"; 
+                statusEl.style.color = "#24963f";
+                statusEl.style.fontWeight = "500";
             } else {
-                alert("❌ Signup Failed: " + data.message);
+                statusEl.innerText = "Closed";
+                statusEl.className = "closed";
+                statusEl.style.color = "#e23744";
             }
-        } catch (error) {
-            console.error(error);
-            alert("🌐 Network Error: Browser cannot talk to port 5051. Make sure your terminal is active!");
-        }
-    }
-
-   
-
-async function loginUser() {
-
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
-
-    try {
-
-        const response = await fetch(`${BACKEND_URL}/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
-
-        const data = await response.json();
-
-        if(data.success){
-
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
-
-            // alert(`Welcome ${data.user.name} 🎉`);
-
-            location.reload();
-
-        }else{
-
-            alert(data.message);
-
         }
 
-    } catch(err){
+        // Clean 12-hour AM/PM formatting for hours
+        let openHour = data["res-open_time"];
+        let suffix = openHour >= 12 ? 'PM' : 'AM';
+        openHour = openHour % 12 || 12;
+        document.getElementById('res-timing').innerText = `• Opens at ${openHour}:00 ${suffix}`;
 
-        console.log(err);
-        alert("Server Error");
+        // Inject card image strings into the layout blocks
+        document.getElementById('img-main').src = data.image;
+        document.getElementById('img-sub1').src = data.image;
+        document.getElementById('img-sub2').src = data.image;
+        document.getElementById('img-sub3').src = data.image;
 
-    }
+        // Context Clustered Links Injections
+        document.getElementById('related-title').innerText = `Related to ${data.names}, ${data.location}`;
+        document.getElementById('related-tags').innerHTML = `
+            <span>Restaurants in ${data.location}</span>, <span>${data.location} Restaurants</span>, 
+            <span>${data.location.toLowerCase()} restaurants</span>, <span>Best ${data.location} restaurants</span>, 
+            <span>Casual Dining in ${data.location}</span>
+        `;
 
-}
+        document.getElementById('around-title').innerText = `Restaurants around ${data.location}`;
+        document.getElementById('around-tags').innerHTML = `
+            <span>Eateries near ${data.location}</span>, <span>Top food stops around ${data.location}</span>
+        `;
 
+        document.getElementById('frequent-tags').innerHTML = `
+            <span>${data.names.toLowerCase()} menu</span>, <span>${data.names.toLowerCase()} ${data.location.toLowerCase()} menu</span>, 
+            <span>${data.names.toLowerCase()} reviews</span>, <span>${data.names.toLowerCase()} restaurant</span>
+        `;
 
-
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if(user){
-
-        document.getElementById("loginBox").classList.add("hidden");
-        document.getElementById("signupBox").classList.add("hidden");
-        document.getElementById("userBox").classList.remove("hidden");
-
-        document.getElementById("welcomeUser").textContent = user.name;
-
-    }
-
-});
-const userBox = document.getElementById("userBox");
-const profileMenu = document.getElementById("profileMenu");
-
-userBox.addEventListener("click", function (e) {
-
-    e.stopPropagation();
-
-    profileMenu.style.display =
-        profileMenu.style.display === "block" ? "none" : "block";
-
-});
-
-
-document.addEventListener("click", function () {
-
-    profileMenu.style.display = "none";
-
-});
-document.getElementById("logoutBtn").addEventListener("click", logout);
-
-function logout(){
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    location.reload();
-
-}
-  const checkbox = document.getElementById("agreeTerms");
-const createBtn = document.getElementById("createBtn");
-
-checkbox.addEventListener("change", function () {
-
-    if (this.checked) {
-        createBtn.classList.add("active");
-        createBtn.disabled = false;
     } else {
-        createBtn.classList.remove("active");
-        createBtn.disabled = true;
+        const projectEl = document.querySelector('.project');
+        if (projectEl) {
+            projectEl.innerHTML = "<div class='container'><h1>Restaurant entry signature not found.</h1><p><a href='newindex.html'>Click here to return to browse index.</a></p></div>";
+        }
     }
-
 });
-
-document.getElementById("prof").addEventListener("click",()=>{
-      window.location.href = "../Delivery/profile.html";
-})
-
-// Get DOM elements
-const passwordInput = document.getElementById('signupPassword');
-const agreeCheckbox = document.getElementById('agreeTerms');
-const createButton = document.getElementById('createBtn');
-
-// Add event listeners to validate in real-time
-passwordInput.addEventListener('input', validateForm);
-agreeCheckbox.addEventListener('change', validateForm);
-
-function isPasswordStrong(password) {
-    // Criteria: Min 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character
-    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return strongPasswordRegex.test(password);
-}
-
-function validateForm() {
-    const password = passwordInput.value;
-    const isPasswordValid = isPasswordStrong(password);
-    const isCheckboxChecked = agreeCheckbox.checked;
-    const reqMessage = document.getElementById('password-requirements');
-
-    // Provide visual feedback for the password
-    if (password === "") {
-        reqMessage.textContent = "";
-    } else if (!isPasswordValid) {
-        reqMessage.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
-        reqMessage.style.color = "#ff4d4d";
-    } else {
-        reqMessage.textContent = "Strong password! ✓";
-        reqMessage.style.color = "#2ecc71";
-    }
-
-    // Toggle button
-    createButton.disabled = !(isPasswordValid && isCheckboxChecked);
-}
-document.addEventListener("DOMContentLoaded", () => {
-    const track = document.querySelector('.pictures');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    // Helper to calculate exact horizontal movement per jump
-    function getScrollStep() {
-        const firstCard = document.querySelector('.Box');
-        if (!firstCard) return 284; // Fallback value if DOM isn't ready
-        
-        // Target 1 exact card footprint (element width + its margins)
-        const cardWidth = firstCard.getBoundingClientRect().width;
-        return cardWidth;
-    }
-
-    function updateButtonStates() {
-        // We use a small setTimeout to let the smooth-scroll finish before calculating boundaries
-        setTimeout(() => {
-            const scrollLeft = track.scrollLeft;
-            const maxScrollLeft = track.scrollWidth - track.clientWidth;
-
-            // Disable prev if we are back at the start boundary
-            prevBtn.disabled = scrollLeft <= 5;
-
-            // Disable next if we hit or pass the rightmost boundary
-            nextBtn.disabled = scrollLeft >= maxScrollLeft - 5;
-        }, 350); // 350ms matches the typical browser smooth-scroll animation window
-    }
-
-    // Next Button Click Logic
-    nextBtn.addEventListener('click', () => {
-        track.scrollBy({
-            left: getScrollStep(),
-            behavior: 'smooth'
-        });
-        updateButtonStates();
-    });
-
-    // Previous Button Click Logic
-    prevBtn.addEventListener('click', () => {
-        track.scrollBy({
-            left: -getScrollStep(),
-            behavior: 'smooth'
-        });
-        updateButtonStates();
-    });
-
-    // Initial check on load to make sure Prev button starts disabled
-    updateButtonStates();
-});
-
-
-
-// -----------------------------New Page Furthur----------------------------------------------------
-
-  function goToDetails(index) {
-    // Redirects to details.html while attaching the array index position (?id=0, ?id=1, etc.)
-    window.location.href = `details.html?id=${index}`;
-}

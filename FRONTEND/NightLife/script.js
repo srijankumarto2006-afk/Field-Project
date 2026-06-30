@@ -234,3 +234,53 @@ function validateForm() {
     // Toggle button
     createButton.disabled = !(isPasswordValid && isCheckboxChecked);
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector('.pictures');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Helper to calculate exact horizontal movement per jump
+    function getScrollStep() {
+        const firstCard = document.querySelector('.Box');
+        if (!firstCard) return 284; // Fallback value if DOM isn't ready
+        
+        // Target 1 exact card footprint (element width + its margins)
+        const cardWidth = firstCard.getBoundingClientRect().width;
+        return cardWidth;
+    }
+
+    function updateButtonStates() {
+        // We use a small setTimeout to let the smooth-scroll finish before calculating boundaries
+        setTimeout(() => {
+            const scrollLeft = track.scrollLeft;
+            const maxScrollLeft = track.scrollWidth - track.clientWidth;
+
+            // Disable prev if we are back at the start boundary
+            prevBtn.disabled = scrollLeft <= 5;
+
+            // Disable next if we hit or pass the rightmost boundary
+            nextBtn.disabled = scrollLeft >= maxScrollLeft - 5;
+        }, 350); // 350ms matches the typical browser smooth-scroll animation window
+    }
+
+    // Next Button Click Logic
+    nextBtn.addEventListener('click', () => {
+        track.scrollBy({
+            left: getScrollStep(),
+            behavior: 'smooth'
+        });
+        updateButtonStates();
+    });
+
+    // Previous Button Click Logic
+    prevBtn.addEventListener('click', () => {
+        track.scrollBy({
+            left: -getScrollStep(),
+            behavior: 'smooth'
+        });
+        updateButtonStates();
+    });
+
+    // Initial check on load to make sure Prev button starts disabled
+    updateButtonStates();
+});

@@ -1,54 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Zomato Login Popup</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants Discovery</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f4f4f6; padding: 40px; }
+        h1 { margin-bottom: 20px; color: #1c1c1c; font-size: 1.8rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .card-img-wrapper { position: relative; width: 100%; height: 200px; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .offer-badge { position: absolute; bottom: 0; left: 0; background: #2563eb; color: white; padding: 4px 10px; font-weight: bold; font-size: 0.8rem; border-top-right-radius: 4px; }
+        .card-content { padding: 15px; position: relative; }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: #1c1c1c; padding-right: 45px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .rating-badge { position: absolute; right: 15px; top: 15px; background: #24963f; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
+        .details { margin-top: 8px; color: #696969; font-size: 0.9rem; display: flex; justify-content: space-between; }
+        .location { margin-top: 8px; font-size: 0.9rem; color: #9c9c9c; display: flex; justify-content: space-between; }
+    </style>
 </head>
-
 <body>
 
+    <h1>Restaurants Collection</h1>
+    <div class="grid" id="restaurant-grid"></div>
 
+    <script>
+        // Your exact data structure array
+        const restaurants = [
+            { "image": "https://b.zmtcdn.com/data/pictures/5/19461655/9079e1636a24751898dba9414c4440ca_featured_v2.jpg", "names": "Peppercorn Restaurant", "rating": "3.5", "foodtypes": "Street Food,Pizza", "location": "Warangal", "price_for-two": 200, "distance": "44 min", "offer-status":false, "offers": "No Offer", "alcohol": false, "res-open_time": 10, "res-close_time": 22, "pet_friendly": false, "outdoor_seating": false },
+            { "image": "https://b.zmtcdn.com/data/pictures/7/21066027/cefeafeafbafba5a5fff543a4d6cd86c_featured_v2.jpg", "names": "Green Leaf Cafe", "rating": "4.4", "foodtypes": "Pizza, Pasta", "location": "Surat", "price_for-two": 150, "distance": "32 min", "offer-status":true, "offers": "₹101 OFF", "alcohol": false, "res-open_time": 20, "res-close_time": 8, "pet_friendly": false, "outdoor_seating": false },
+            { "image": "https://b.zmtcdn.com/data/pictures/2/20496432/2a6b302fcf1695f1e84c02a6ea361f70_featured_v2.jpg", "names": "Ocean Pearl", "rating": "3.7", "foodtypes": "Street Food,Pizza", "location": "Surat", "price_for-two": 500, "distance": "21 min", "offer-status":true, "offers": "₹101 OFF", "alcohol": true, "res-open_time": 18, "res-close_time": 6, "pet_friendly": false, "outdoor_seating": true },
+            { "image": "https://b.zmtcdn.com/data/pictures/0/18795170/b6047e53bdb9ebce032c9505dc23eed0_featured_v2.jpg", "names": "Mirell Restaurant", "rating": "4.5", "foodtypes": "Ice Cream, Healthy Food", "location": "Nallakunta & Vidyanagar", "price_for-two": 150, "offer-status":true, "distance": "24 min", "offers": "Flat 50% OFF", "alcohol": true, "res-open_time": 0, "res-close_time": 12, "pet_friendly": false, "outdoor_seating": false },
+            { "image": "https://b.zmtcdn.com/data/pictures/7/21066027/cefeafeafbafba5a5fff543a4d6cd86c_featured_v2.jpg", "names": "Maharaj Hotel", "rating": "4.4", "foodtypes": "Maharashtrian,Punjabi", "location": "Kolkata", "price_for-two": 500, "distance": "34 min", "offer-status":true, "offers": "₹101 OFF", "alcohol": true, "res-open_time": 23, "res-close_time": 11, "pet_friendly": false, "outdoor_seating": true },
+            { "image": "https://b.zmtcdn.com/data/pictures/7/20521297/03ba87b3729f88d9fdfd77b50ce6452b_o2_featured_v2.jpg", "names": "Harvest Kitchen", "rating": "4.1", "foodtypes": "North Indian", "location": "Madurai", "price_for-two": 150, "distance": "37 min", "offer-status":true, "offers": "₹101 OFF", "alcohol": true, "res-open_time": 20, "res-close_time": 8, "pet_friendly": false, "outdoor_seating": false },
+            { "image": "https://b.zmtcdn.com/data/pictures/9/21962609/8fb3c84f6912d7fb7e8860c76d58abd5_featured_v2.jpg", "names": "Babylon Brewery & Club", "rating": "3.8", "foodtypes": "Burger", "location": "Thiruvananthapuram", "price_for-two": 500, "distance": "23 min", "offer-status":true, "offers": "₹101 OFF", "alcohol": false, "res-open_time": 11, "res-close_time": 23, "pet_friendly": true, "outdoor_seating": false },
+            { "image": "https://b.zmtcdn.com/data/pictures/1/21503991/cb680d632e34fb3a153ec501c3c6c0ee_featured_v2.jpg", "names": "Abraj Hotel", "rating": "4.7", "foodtypes": "Maharashtrian,Punjabi", "location": "Lucknow", "price_for-two": 200, "distance": "41 min", "offer-status":false, "offers": "No Offer", "alcohol": false, "res-open_time": 10, "res-close_time": 22, "pet_friendly": false, "outdoor_seating": false },
+            { "image": "https://b.zmtcdn.com/data/pictures/1/22044921/4c9622fe6ba60a5579ca2ef7e1c561c6_o2_featured_v2.jpg?output-format=webp", "names": "The Food Factory", "rating": "4.7", "foodtypes": "Desserts, Bakery", "location": "Nallakunta & Vidyanagar", "price_for-two": 500, "distance": "38 min", "offer-status":true, "offers": "Flat 10% OFF", "alcohol": true, "res-open_time": 14, "res-close_time": 2, "pet_friendly": false, "outdoor_seating": false }
+        ];
 
-<!-- DARK OVERLAY -->
-<div class="overlay" id="overlay">
+        const grid = document.getElementById('restaurant-grid');
 
-    <!-- LOGIN MODAL -->
-    <div class="login-box">
+        // Loop to render cards dynamically
+        restaurants.forEach((res, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('onclick', `goToDetails(${index})`);
 
-        <div class="login-header">
-            <h2>Login</h2>
-            <span class="close" onclick="closeLogin()">✕</span>
-        </div>
+            // Only display an offer tag wrapper if offer-status is explicitly true
+            let offerHTML = res["offer-status"] ? `<span class="offer-badge">${res.offers}</span>` : '';
 
-        <div class="phone-input">
-            <span class="code">🇮🇳 +91</span>
-            <input type="text" placeholder="Phone">
-        </div>
+            card.innerHTML = `
+                <div class="card-img-wrapper">
+                    <img src="${res.image}" class="card-img" alt="${res.names}">
+                    ${offerHTML}
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${res.names}</div>
+                    <span class="rating-badge">${res.rating} ★</span>
+                    <p class="details"><span>${res.foodtypes}</span> <span>₹${res["price_for-two"]} for two</span></p>
+                    <p class="location"><span>${res.location}</span> <span>${res.distance}</span></p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
 
-        <button class="otp-btn">Send One Time Password</button>
-
-        <div class="divider">
-            <span>or</span>
-        </div>
-
-        <button class="email-btn">
-            Continue with Email
-        </button>
-
-        <button class="google-btn">
-            Sign in as Srijan
-        </button>
-
-        <p class="signup">
-            New to Hotel Orient Pearl ? <span>Create account</span>
-        </p>
-
-    </div>
-
-</div>
-
-<script src="script.js"></script>
-
+        function goToDetails(index) {
+            // Passes the unique array item index directly into the URL query parameter
+            window.location.href = `details.html?id=${index}`;
+        }
+    </script>
 </body>
 </html>

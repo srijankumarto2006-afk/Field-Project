@@ -480,7 +480,7 @@ color:#393838;
 .order{
     background-color: #F8F8F8;
     padding:40px 0px;
-    overflow-x:scroll;
+    
     scroll-behavior: smooth;
     gap:30px;
     position: relative;
@@ -490,7 +490,7 @@ color:#393838;
 .order1{
     background-color:white;
     padding:40px 0px;
-    overflow-x:scroll;
+    /* overflow-x:scroll; */
     scroll-behavior: smooth;
     gap:30px;
     position: relative;
@@ -604,6 +604,50 @@ body {
 .receipe{
     margin:0.5rem;
 }
+/*/* Navigation Buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            z-index:9999999 !important;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: #f7f7f7;
+        }
+
+        /* Disabled State styling */
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .prev-btn {
+            left: -10px;
+        }
+
+        .next-btn {
+            right: -10px;
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #111010;
+        }
 .rec{
    margin: 0.5rem;
   /* Prevent cards from shrinking/squeezing together */
@@ -612,9 +656,15 @@ body {
 .slider{
     overflow: hidden;
 }
+.slidessss-track ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
 .sliderssss {
-  overflow: hidden;
-  width: 100%;
+  display: flex;
+    /* CRITICAL CHANGE: Changing this to hidden prevents manual touch/trackpad/mouse scrolling */
+    overflow-x: hidden; 
+    scroll-behavior: smooth;
+    width: 100%;
 }
 .slidessss-track {
   will-change: transform;
@@ -921,46 +971,5 @@ display:flex;
 }
 
 
-/*/* Navigation Buttons */
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 34px;
-            height: 34px;
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-            transition: all 0.2s ease;
-        }
 
-        .nav-btn:hover:not(:disabled) {
-            background-color: #f7f7f7;
-        }
-
-        /* Disabled State styling */
-        .nav-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .prev-btn {
-            left: -10px;
-        }
-
-        .next-btn {
-            right: -10px;
-        }
-
-        .nav-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: #111010;
-        }
+        
