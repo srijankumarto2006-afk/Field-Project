@@ -6,7 +6,7 @@
    <title>The Best Restaurants in Patna for Dining Out </title>
    <link rel="shortcut icon" href="../Landingpage/favicon.png?v=3">
     <link rel="stylesheet" href="./newstyle.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+   
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
 
          <div class="user-profile hidden" id="userBox">
 
-    <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A" alt="User" class="user-icon">
+    <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A" alt="User" class="user-icon" id="userPic">
 
     <span id="welcomeUser"></span>
 
@@ -293,7 +293,7 @@
       
        
 <div class="divide">
-        <button class="google-btn" onclick="googleLogin()">
+        <button class="google-btn" id="googleLoginBtn" >
     <img src="https://img.icons8.com/color/48/google-logo.png" width="20">  
     <p class="empara">Sign in with Google</p>
 </button>
@@ -338,7 +338,7 @@
        <button class="create-btn" id="createBtn" onclick="signupUser()"disabled>Create account</button>
         <div class="divider">or</div>
 
-        <button class="google-btn" onclick="googleLogin()">
+        <button class="google-btn" id="googleSignupBtn" >
     <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" width="20px">
     Sign in with Google
 </button>
@@ -352,6 +352,7 @@
 
 
 </div> 
+
        <script src="../auth.js"></script>
        <script src="./newscript.js"></script>
        

@@ -39,177 +39,142 @@ document.getElementById("newlogin").addEventListener("click", () => {
 
 // // ---------------------------------------------------------------backend  code------------------------------------------
 
-    // Hardcoded to port 6000 so it NEVER looks for port 5051 again
-    const BACKEND_URL = "http://127.0.0.1:5051/api/auth";
+   // ---------------------------------------------------------------backend code------------------------------------------
+const BACKEND_URL = "http://127.0.0.1:5051/api/auth";
 
-    async function signupUser() {
-        if (window.event) window.event.preventDefault();
+async function signupUser() {
+    if (window.event) window.event.preventDefault();
 
-        const nameEl = document.getElementById("signupName");
-        const emailEl = document.getElementById("signupEmail");
-        const passwordEl = document.getElementById("signupPassword");
+    const nameEl = document.getElementById("signupName");
+    const emailEl = document.getElementById("signupEmail");
+    const passwordEl = document.getElementById("signupPassword");
 
-        if (!nameEl || !emailEl || !passwordEl) {
-            alert("❌ Frontend Error: Input fields missing in HTML.");
-            return;
-        }
-
-        const name = nameEl.value.trim();
-        const email = emailEl.value.trim();
-        const password = passwordEl.value.trim();
-
-        if (!name || !email || !password) {
-            alert("⚠️ Please fill out all fields.");
-            return;
-        }
-
-        try {
-            const response = await fetch(`${BACKEND_URL}/signup`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                alert("🎉 Account Created Successfully! Please login.");
-                nameEl.value = "";
-                emailEl.value = "";
-                passwordEl.value = "";
-                if (typeof closeSignup === "function") closeSignup();
-                if (typeof openLogin === "function") openLogin();
-            } else {
-                alert("❌ Signup Failed: " + data.message);
-            }
-        } catch (error) {
-            console.error(error);
-            alert("🌐 Network Error: Browser cannot talk to port 5051. Make sure your terminal is active!");
-        }
+    if (!nameEl || !emailEl || !passwordEl) {
+        alert("❌ Frontend Error: Input fields missing in HTML.");
+        return;
     }
 
-   
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim();
+    const password = passwordEl.value.trim();
+
+    if (!name || !email || !password) {
+        alert("⚠️ Please fill out all fields.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${BACKEND_URL}/signup`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert("🎉 Account Created Successfully! Please login.");
+            nameEl.value = "";
+            emailEl.value = "";
+            passwordEl.value = "";
+            if (typeof closeSignup === "function") closeSignup();
+            if (typeof openLogin === "function") openLogin();
+        } else {
+            alert("❌ Signup Failed: " + data.message);
+        }
+    } catch (error) {
+        console.error(error);
+        alert("🌐 Network Error: Browser cannot talk to port 5051. Make sure your terminal is active!");
+    }
+}
 
 async function loginUser() {
-
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value.trim();
 
     try {
-
         const response = await fetch(`${BACKEND_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                email,
-                password
-            })
+            body: JSON.stringify({ email, password })
         });
 
         const data = await response.json();
 
         if(data.success){
-
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
-
-            // alert(`Welcome ${data.user.name} 🎉`);
-
             location.reload();
-
-        }else{
-
+        } else {
             alert(data.message);
-
         }
-
     } catch(err){
-
         console.log(err);
         alert("Server Error");
-
     }
-
 }
 
-
-
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if(user){
-
-        document.getElementById("loginBox").classList.add("hidden");
-        document.getElementById("signupBox").classList.add("hidden");
-        document.getElementById("userBox").classList.remove("hidden");
-
-        document.getElementById("welcomeUser").textContent = user.name;
-
-    }
-
-});
+// === PROFILE DROPDOWN MENU INTERACTION ===
 const userBox = document.getElementById("userBox");
 const profileMenu = document.getElementById("profileMenu");
 
-userBox.addEventListener("click", function (e) {
-
-    e.stopPropagation();
-
-    profileMenu.style.display =
-        profileMenu.style.display === "block" ? "none" : "block";
-
-});
-
-
-document.addEventListener("click", function () {
-
-    profileMenu.style.display = "none";
-
-});
-document.getElementById("logoutBtn").addEventListener("click", logout);
-
-function logout(){
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    location.reload();
-
+if (userBox && profileMenu) {
+    userBox.addEventListener("click", function (e) {
+        e.stopPropagation();
+        profileMenu.style.display = profileMenu.style.display === "block" ? "none" : "block";
+    });
 }
 
-  const checkbox = document.getElementById("agreeTerms");
-const createBtn = document.getElementById("createBtn");
-
-checkbox.addEventListener("change", function () {
-
-    if (this.checked) {
-        createBtn.classList.add("active");
-        createBtn.disabled = false;
-    } else {
-        createBtn.classList.remove("active");
-        createBtn.disabled = true;
-    }
-
+document.addEventListener("click", function () {
+    if (profileMenu) profileMenu.style.display = "none";
 });
 
-document.getElementById("prof").addEventListener("click",()=>{
-      window.location.href = "../Delivery/profile.html";
-})
-// Get DOM elements
+if (document.getElementById("logoutBtn")) {
+    document.getElementById("logoutBtn").addEventListener("click", logout);
+}
+
+function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    sessionStorage.clear();
+    // Clear out the URL parameters so it reloads parameter-free
+    window.location.href = window.location.origin + window.location.pathname;
+}
+
+const checkbox = document.getElementById("agreeTerms");
+const createBtn = document.getElementById("createBtn");
+
+if (checkbox && createBtn) {
+    checkbox.addEventListener("change", function () {
+        if (this.checked) {
+            createBtn.classList.add("active");
+            createBtn.disabled = false;
+        } else {
+            createBtn.classList.remove("active");
+            createBtn.disabled = true;
+        }
+    });
+}
+
+if (document.getElementById("prof")) {
+    document.getElementById("prof").addEventListener("click", () => {
+        window.location.href = "../Delivery/profile.html";
+    });
+}
+
+// === REAL-TIME VALIDATION ===
 const passwordInput = document.getElementById('signupPassword');
 const agreeCheckbox = document.getElementById('agreeTerms');
 const createButton = document.getElementById('createBtn');
 
-// Add event listeners to validate in real-time
-passwordInput.addEventListener('input', validateForm);
-agreeCheckbox.addEventListener('change', validateForm);
+if (passwordInput && agreeCheckbox && createButton) {
+    passwordInput.addEventListener('input', validateForm);
+    agreeCheckbox.addEventListener('change', validateForm);
+}
 
 function isPasswordStrong(password) {
-    // Criteria: Min 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return strongPasswordRegex.test(password);
 }
@@ -220,67 +185,126 @@ function validateForm() {
     const isCheckboxChecked = agreeCheckbox.checked;
     const reqMessage = document.getElementById('password-requirements');
 
-    // Provide visual feedback for the password
     if (password === "") {
-        reqMessage.textContent = "";
+        if (reqMessage) reqMessage.textContent = "";
     } else if (!isPasswordValid) {
-        reqMessage.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
-        reqMessage.style.color = "#ff4d4d";
+        if (reqMessage) {
+            reqMessage.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
+            reqMessage.style.color = "#ff4d4d";
+        }
     } else {
-        reqMessage.textContent = "Strong password! ✓";
-        reqMessage.style.color = "#2ecc71";
+        if (reqMessage) {
+            reqMessage.textContent = "Strong password! ✓";
+            reqMessage.style.color = "#2ecc71";
+        }
     }
 
-    // Toggle button
-    createButton.disabled = !(isPasswordValid && isCheckboxChecked);
+    if (createButton) createButton.disabled = !(isPasswordValid && isCheckboxChecked);
 }
+
+// === CAROUSEL HORIZONTAL SLIDER INTERACTION ===
 document.addEventListener("DOMContentLoaded", () => {
     const track = document.querySelector('.pictures');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
-    // Helper to calculate exact horizontal movement per jump
+    if (!track || !prevBtn || !nextBtn) return;
+
     function getScrollStep() {
         const firstCard = document.querySelector('.Box');
-        if (!firstCard) return 284; // Fallback value if DOM isn't ready
-        
-        // Target 1 exact card footprint (element width + its margins)
-        const cardWidth = firstCard.getBoundingClientRect().width;
-        return cardWidth;
+        if (!firstCard) return 284; 
+        return firstCard.getBoundingClientRect().width;
     }
 
     function updateButtonStates() {
-        // We use a small setTimeout to let the smooth-scroll finish before calculating boundaries
         setTimeout(() => {
             const scrollLeft = track.scrollLeft;
             const maxScrollLeft = track.scrollWidth - track.clientWidth;
-
-            // Disable prev if we are back at the start boundary
             prevBtn.disabled = scrollLeft <= 5;
-
-            // Disable next if we hit or pass the rightmost boundary
             nextBtn.disabled = scrollLeft >= maxScrollLeft - 5;
-        }, 350); // 350ms matches the typical browser smooth-scroll animation window
+        }, 350); 
     }
 
-    // Next Button Click Logic
     nextBtn.addEventListener('click', () => {
-        track.scrollBy({
-            left: getScrollStep(),
-            behavior: 'smooth'
-        });
+        track.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
         updateButtonStates();
     });
 
-    // Previous Button Click Logic
     prevBtn.addEventListener('click', () => {
-        track.scrollBy({
-            left: -getScrollStep(),
-            behavior: 'smooth'
-        });
+        track.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
         updateButtonStates();
     });
 
-    // Initial check on load to make sure Prev button starts disabled
     updateButtonStates();
+});
+
+// -----------------------------New Page Further----------------------------------------------------
+function goToDetails(index) {
+    window.location.href = `details.html?id=${index}`;
+}
+
+// ================== GOOGLE SIGN IN & DYNAMIC REDIRECTION ==================
+function getGoogleAuthUrl() {
+    let currentPath = window.location.pathname;
+    if (!currentPath || currentPath === "/") {
+        currentPath = "/FRONTEND/index.html";
+    }
+    return `http://localhost:5051/api/auth/google?state=${encodeURIComponent(currentPath)}`;
+}
+
+const googleLoginBtn = document.getElementById("googleLoginBtn");
+const googleSignupBtn = document.getElementById("googleSignupBtn");
+
+if (googleLoginBtn) {
+    googleLoginBtn.addEventListener("click", () => {
+        window.location.href = getGoogleAuthUrl();
+    });
+}
+
+if (googleSignupBtn) {
+    googleSignupBtn.addEventListener("click", () => {
+        window.location.href = getGoogleAuthUrl();
+    });
+}
+
+// ================= UNIFIED SESSION INITIALIZATION =================
+window.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const userDataString = urlParams.get('user');
+
+    let currentUser = null;
+
+    if (userDataString) {
+        try {
+            currentUser = JSON.parse(decodeURIComponent(userDataString));
+            localStorage.setItem("user", JSON.stringify(currentUser));
+            if (token) localStorage.setItem("token", token);
+        } catch (e) {
+            console.error("Error parsing Google redirect user data:", e);
+        }
+    } else {
+        currentUser = JSON.parse(localStorage.getItem("user"));
+    }
+
+    if (currentUser) {
+        const loginBox = document.getElementById("loginBox");
+        const signupBox = document.getElementById("signupBox");
+        const userBox = document.getElementById("userBox");
+        const welcomeUser = document.getElementById("welcomeUser");
+        const userPic = document.getElementById("userPic");
+
+        if (loginBox) loginBox.classList.add("hidden");
+        if (signupBox) signupBox.classList.add("hidden");
+        if (userBox) userBox.classList.remove("hidden");
+
+        if (currentUser.name && welcomeUser) {
+            const firstName = currentUser.name.trim().split(" ")[0];
+            welcomeUser.textContent = `Hi, ${firstName}`;
+        }
+
+        if (currentUser.picture && userPic) {
+            userPic.src = currentUser.picture;
+        }
+    }
 });

@@ -4,17 +4,17 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const User = require("../models/User");
 
 // ==========================================
-// 1. SIGNUP API (Create Account)
+// 1. SIGNUP API
 // ==========================================
 router.post("/signup", async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        // Check empty fields
         if (!name || !email || !password) {
             return res.status(400).json({
                 success: false,
@@ -22,8 +22,8 @@ router.post("/signup", async (req, res) => {
             });
         }
 
-        // Check if email already exists
         const existingUser = await User.findOne({ email });
+
         if (existingUser) {
             return res.status(400).json({
                 success: false,
@@ -31,24 +31,22 @@ router.post("/signup", async (req, res) => {
             });
         }
 
-        // Encrypt password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create new user
         const user = await User.create({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            provider: "local"
         });
 
-        // Generate JWT Token
         const token = jwt.sign(
             { id: user._id },
-            process.env.JWT_SECRET || "default_secret_key",
+            process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );
 
-        res.status(201).json({
+        return res.status(201).json({
             success: true,
             message: "Account Created Successfully",
             token,
@@ -60,7 +58,7 @@ router.post("/signup", async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: error.message
         });
@@ -68,13 +66,12 @@ router.post("/signup", async (req, res) => {
 });
 
 // ==========================================
-// 2. LOGIN API (Sign In)
+// 2. LOGIN API
 // ==========================================
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Check empty fields
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
@@ -82,8 +79,8 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Check if user exists
         const user = await User.findOne({ email });
+
         if (!user) {
             return res.status(400).json({
                 success: false,
@@ -91,8 +88,15 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Compare Passwords
+        if (user.provider === "google" || !user.password) {
+            return res.status(400).json({
+                success: false,
+                message: "This account is registered via Google. Please login with Google."
+            });
+        }
+
         const isMatch = await bcrypt.compare(password, user.password);
+
         if (!isMatch) {
             return res.status(400).json({
                 success: false,
@@ -100,14 +104,13 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Generate JWT Token
         const token = jwt.sign(
             { id: user._id },
-            process.env.JWT_SECRET || "default_secret_key",
+            process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Logged In Successfully",
             token,
@@ -119,14 +122,70 @@ router.post("/login", async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: error.message
         });
     }
 });
 
-// Test route
+// ==========================================
+// 3. GOOGLE LOGIN (Updated with dynamic state tracking)
+// ==========================================
+router.get("/google", (req, res, next) => {
+    // 1. Read incoming custom folder path from frontend button trigger (?state=...)
+    const targetPath = req.query.state || "/FRONTEND/DiningOut/newindex.html"; 
+    
+    // 2. Forward that destination context into Passport using the built-in state parameter
+    passport.authenticate("google", {
+        scope: ["profile", "email"],
+        prompt: "select_account",
+        state: targetPath 
+    })(req, res, next);
+});
+
+// ==========================================
+// 4. GOOGLE CALLBACK (Updated with dynamic redirect logic)
+// ==========================================
+router.get(
+    "/google/callback",
+    passport.authenticate("google", {
+        session: false,
+        failureRedirect: "http://127.0.0.1:5501/FRONTEND/Landingpage/index.html"
+    }),
+    (req, res) => {
+        // 1. Safely extract the state variable passed back from Google
+        let targetPath = req.query.state || "/FRONTEND/DiningOut/newindex.html";
+
+        // Avoid doubling up forward slashes if missing
+        if (!targetPath.startsWith("/")) {
+            targetPath = "/" + targetPath;
+        }
+
+        // 2. Build secure Session Authentication Payload variables
+        const token = jwt.sign(
+            { id: req.user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
+        );
+
+        const user = encodeURIComponent(JSON.stringify({
+            id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            picture: req.user.picture
+        }));
+
+        // 3. ✅ DYNAMIC REDIRECT FIX: Using targetPath instead of a hardcoded string!
+        return res.redirect(
+            `http://127.0.0.1:5501${targetPath}?token=${token}&user=${user}`
+        );
+    }
+);
+
+// ==========================================
+// TEST
+// ==========================================
 router.get("/test", (req, res) => {
     res.send("Auth Route Working");
 });

@@ -1692,7 +1692,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
       // --- 1. Dynamic Profile Name Syncing & Access Control ---
-       // --- 1. Dynamic Profile Name Syncing & Access Control ---
+       // --- 1. Dynamic Profile Name Syncing, Avatar Display & Access Control ---
         document.addEventListener("DOMContentLoaded", function() {
             const userData = localStorage.getItem("user");
 
@@ -1700,12 +1700,33 @@ window.addEventListener('DOMContentLoaded', () => {
                 try {
                     const user = JSON.parse(userData);
                     
+                    // A. Update the Top Navbar Name element
                     const welcomeUser = document.getElementById('welcomeUser');
-                    if (welcomeUser) welcomeUser.textContent = user.name;
+                    if (welcomeUser && user.name) {
+                        // Optional: Use .split(" ")[0] if you only want to display their first name in the navbar
+                        welcomeUser.textContent = user.name; 
+                    }
 
+                    // B. Update the Main Profile Section Header Name element
                     const mainUserNameElement = document.querySelector('.user-name');
-                    if (mainUserNameElement) mainUserNameElement.textContent = user.name;
+                    if (mainUserNameElement && user.name) {
+                        mainUserNameElement.textContent = user.name;
+                    }
                     
+                    // C. Dynamically switch user icons if a Google Account picture exists
+                    if (user.picture) {
+                        // 1. Update tiny navbar image avatar
+                        const navAvatar = document.querySelector('.user-icon');
+                        if (navAvatar) navAvatar.src = user.picture;
+
+                        // 2. Swap out the generic FontAwesome user icon in the main profile header with the Google avatar
+                        const mainAvatarContainer = document.querySelector('.avatar-container');
+                        if (mainAvatarContainer) {
+                            mainAvatarContainer.innerHTML = `<img src="${user.picture}" alt="Profile Picture" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+                        }
+                    }
+
+                    // D. Adjust page title window text context
                     document.title = `${user.name} - Zomato Profile Clone`;
                 } catch (e) {
                     console.error("Error parsing user data from localStorage:", e);
@@ -1713,16 +1734,18 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
                 alert("Please log in first!");
                 // 🚀 If authorization fails, send them back to the DiningOut homepage safely
-                window.location.href = "/FRONTEND/DiningOut/newindex.html";
+                window.location.href = "../DiningOut/newindex.html";
             }
         });
+
+
+        
 
         // --- 3. Dropdown Menu Toggle Logic ---
         const navProfileTrigger = document.getElementById('navProfileTrigger');
         const profileMenu = document.getElementById('profileMenu');
 
         if (navProfileTrigger && profileMenu) {
-            // Toggle dropdown display state when user clicks profile block
             navProfileTrigger.addEventListener('click', function(event) {
                 event.stopPropagation(); // Stops instant close trigger from window listener below
                 
@@ -1735,7 +1758,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Close dropdown container instantly if user clicks anywhere else on screen
             window.addEventListener('click', function() {
                 profileMenu.classList.remove('show');
                 profileMenu.style.display = "none";
@@ -1752,18 +1774,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 // Clear authorization tokens
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
+                sessionStorage.clear();
                 
                 // Step back out of Delivery folder, straight into DiningOut/newindex.html
                 window.location.href = '../DiningOut/newindex.html'; 
             });
         } else {
-            // Fallback warning log if the logout button element is missing from the DOM
             console.warn("⚠️ Warning: Could not find 'logoutBtn' element in the HTML layout.");
         }
     
-    const profBtn = document.getElementById("prof");
-    if (profBtn) {
-        profBtn.addEventListener("click", () => {
-            window.location.href = "/FRONTEND/Delivery/profile.html";
-        });
-    }

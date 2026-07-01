@@ -38,179 +38,141 @@ document.getElementById("newlogin").addEventListener("click", () => {
 });
 
 // // ---------------------------------------------------------------backend  code------------------------------------------
+const BACKEND_URL = "http://127.0.0.1:5051/api/auth";
 
-    // Hardcoded to port 6000 so it NEVER looks for port 5051 again
-    const BACKEND_URL = "http://127.0.0.1:5051/api/auth";
+async function signupUser() {
+    if (window.event) window.event.preventDefault();
 
-    async function signupUser() {
-        if (window.event) window.event.preventDefault();
+    const nameEl = document.getElementById("signupName");
+    const emailEl = document.getElementById("signupEmail");
+    const passwordEl = document.getElementById("signupPassword");
 
-        const nameEl = document.getElementById("signupName");
-        const emailEl = document.getElementById("signupEmail");
-        const passwordEl = document.getElementById("signupPassword");
-
-        if (!nameEl || !emailEl || !passwordEl) {
-            alert("❌ Frontend Error: Input fields missing in HTML.");
-            return;
-        }
-
-        const name = nameEl.value.trim();
-        const email = emailEl.value.trim();
-        const password = passwordEl.value.trim();
-
-        if (!name || !email || !password) {
-            alert("⚠️ Please fill out all fields.");
-            return;
-        }
-
-        try {
-            const response = await fetch(`${BACKEND_URL}/signup`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                alert("🎉 Account Created Successfully! Please login.");
-                nameEl.value = "";
-                emailEl.value = "";
-                passwordEl.value = "";
-                if (typeof closeSignup === "function") closeSignup();
-                if (typeof openLogin === "function") openLogin();
-            } else {
-                alert("❌ Signup Failed: " + data.message);
-            }
-        } catch (error) {
-            console.error(error);
-            alert("🌐 Network Error: Browser cannot talk to port 5051. Make sure your terminal is active!");
-        }
+    if (!nameEl || !emailEl || !passwordEl) {
+        alert("❌ Frontend Error: Input fields missing in HTML.");
+        return;
     }
 
-   
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim();
+    const password = passwordEl.value.trim();
+
+    if (!name || !email || !password) {
+        alert("⚠️ Please fill out all fields.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${BACKEND_URL}/signup`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert("🎉 Account Created Successfully! Please login.");
+            nameEl.value = "";
+            emailEl.value = "";
+            passwordEl.value = "";
+            if (typeof closeSignup === "function") closeSignup();
+            if (typeof openLogin === "function") openLogin();
+        } else {
+            alert("❌ Signup Failed: " + data.message);
+        }
+    } catch (error) {
+        console.error(error);
+        alert("🌐 Network Error: Browser cannot talk to port 5051. Make sure your terminal is active!");
+    }
+}
 
 async function loginUser() {
-
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value.trim();
 
     try {
-
         const response = await fetch(`${BACKEND_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                email,
-                password
-            })
+            body: JSON.stringify({ email, password })
         });
 
         const data = await response.json();
 
         if(data.success){
-
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
-
-            // alert(`Welcome ${data.user.name} 🎉`);
-
             location.reload();
-
-        }else{
-
+        } else {
             alert(data.message);
-
         }
-
     } catch(err){
-
         console.log(err);
         alert("Server Error");
-
     }
-
 }
 
-
-
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if(user){
-
-        document.getElementById("loginBox").classList.add("hidden");
-        document.getElementById("signupBox").classList.add("hidden");
-        document.getElementById("userBox").classList.remove("hidden");
-
-        document.getElementById("welcomeUser").textContent = user.name;
-
-    }
-
-});
+// === PROFILE DROPDOWN MENU INTERACTION ===
 const userBox = document.getElementById("userBox");
 const profileMenu = document.getElementById("profileMenu");
 
-userBox.addEventListener("click", function (e) {
-
-    e.stopPropagation();
-
-    profileMenu.style.display =
-        profileMenu.style.display === "block" ? "none" : "block";
-
-});
-
-
-document.addEventListener("click", function () {
-
-    profileMenu.style.display = "none";
-
-});
-document.getElementById("logoutBtn").addEventListener("click", logout);
-
-function logout(){
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    location.reload();
-
+if (userBox && profileMenu) {
+    userBox.addEventListener("click", function (e) {
+        e.stopPropagation();
+        profileMenu.style.display = profileMenu.style.display === "block" ? "none" : "block";
+    });
 }
 
-  const checkbox = document.getElementById("agreeTerms");
+document.addEventListener("click", function () {
+    if (profileMenu) profileMenu.style.display = "none";
+});
+
+if (document.getElementById("logoutBtn")) {
+    document.getElementById("logoutBtn").addEventListener("click", logout);
+}
+
+function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    sessionStorage.clear();
+    // Clear out the URL parameters so it reloads parameter-free
+    window.location.href = window.location.origin + window.location.pathname;
+}
+
+const checkbox = document.getElementById("agreeTerms");
 const createBtn = document.getElementById("createBtn");
 
-checkbox.addEventListener("change", function () {
+if (checkbox && createBtn) {
+    checkbox.addEventListener("change", function () {
+        if (this.checked) {
+            createBtn.classList.add("active");
+            createBtn.disabled = false;
+        } else {
+            createBtn.classList.remove("active");
+            createBtn.disabled = true;
+        }
+    });
+}
 
-    if (this.checked) {
-        createBtn.classList.add("active");
-        createBtn.disabled = false;
-    } else {
-        createBtn.classList.remove("active");
-        createBtn.disabled = true;
-    }
+if (document.getElementById("prof")) {
+    document.getElementById("prof").addEventListener("click", () => {
+        window.location.href = "../Delivery/profile.html";
+    });
+}
 
-});
-document.getElementById("prof").addEventListener("click", () => {
-    // 🚀 Force the browser to ALWAYS go to the Delivery folder where your layout lives
-    window.location.href = "/FRONTEND/Delivery/profile.html";
-});
-
-// Get DOM elements
+// === REAL-TIME VALIDATION ===
 const passwordInput = document.getElementById('signupPassword');
 const agreeCheckbox = document.getElementById('agreeTerms');
 const createButton = document.getElementById('createBtn');
 
-// Add event listeners to validate in real-time
-passwordInput.addEventListener('input', validateForm);
-agreeCheckbox.addEventListener('change', validateForm);
+if (passwordInput && agreeCheckbox && createButton) {
+    passwordInput.addEventListener('input', validateForm);
+    agreeCheckbox.addEventListener('change', validateForm);
+}
 
 function isPasswordStrong(password) {
-    // Criteria: Min 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return strongPasswordRegex.test(password);
 }
@@ -221,84 +183,132 @@ function validateForm() {
     const isCheckboxChecked = agreeCheckbox.checked;
     const reqMessage = document.getElementById('password-requirements');
 
-    // Provide visual feedback for the password
     if (password === "") {
-        reqMessage.textContent = "";
+        if (reqMessage) reqMessage.textContent = "";
     } else if (!isPasswordValid) {
-        reqMessage.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
-        reqMessage.style.color = "#ff4d4d";
+        if (reqMessage) {
+            reqMessage.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
+            reqMessage.style.color = "#ff4d4d";
+        }
     } else {
-        reqMessage.textContent = "Strong password! ✓";
-        reqMessage.style.color = "#2ecc71";
+        if (reqMessage) {
+            reqMessage.textContent = "Strong password! ✓";
+            reqMessage.style.color = "#2ecc71";
+        }
     }
 
-    // Toggle button
-    createButton.disabled = !(isPasswordValid && isCheckboxChecked);
+    if (createButton) createButton.disabled = !(isPasswordValid && isCheckboxChecked);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const track = document.getElementById("SlideTrack");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const items = document.querySelectorAll(".rec");
+    // Target the outer container which holds the overflow restriction
+    const sliderContainer = document.querySelector(".sliderssss");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-  if (!track || items.length === 0) return;
+    // Scroll by roughly one or two item widths (adjust as needed)
+    const scrollAmount = 250; 
 
-  let currentIndex = 0;
+    const updateButtons = () => {
+        const scrollLeft = sliderContainer.scrollLeft;
+        const maxScroll = sliderContainer.scrollWidth - sliderContainer.clientWidth;
 
-  // Calculate the exact width of one item including its margins
-  function getItemStep() {
-    const style = window.getComputedStyle(items[0]);
-    const marginRight = parseFloat(style.marginRight) || 0;
-    const marginLeft = parseFloat(style.marginLeft) || 0;
-    return items[0].getBoundingClientRect().width + marginRight + marginLeft;
-  }
+        // Enable/Disable checking with a 2px buffer for subpixel rounding issues
+        prevBtn.disabled = scrollLeft <= 2;
+        nextBtn.disabled = scrollLeft >= maxScroll - 2;
+    };
 
-  // Calculate how many total steps the slider can take before hitting the end
-  function getMaxIndex() {
-    const containerWidth = track.parentElement.clientWidth;
-    const itemWidth = getItemStep();
-    const visibleItems = Math.floor(containerWidth / itemWidth) || 1;
-    return items.length - visibleItems;
-  }
+    nextBtn.addEventListener("click", () => {
+        sliderContainer.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth"
+        });
+    });
 
-  function updateSlider() {
-    const step = getItemStep();
-    const maxIndex = getMaxIndex();
+    prevBtn.addEventListener("click", () => {
+        sliderContainer.scrollBy({
+            left: -scrollAmount,
+            behavior: "smooth"
+        });
+    });
 
-    // Bound check to prevent over-scrolling
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
-    if (currentIndex < 0) currentIndex = 0;
+    // Monitor scroll events to toggle button states dynamically
+    sliderContainer.addEventListener("scroll", updateButtons);
 
-    // Shift the track
-    const amountToMove = currentIndex * step;
-    track.style.transform = `translateX(-${amountToMove}px)`;
+    // Initial run to configure the 'previous' button state on load
+    updateButtons();
 
-    // Toggle button disabled states visually and functionally
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex >= maxIndex;
-  }
+    // Recalculate if the browser window changes sizes
+    window.addEventListener("resize", updateButtons);
+});
 
-  // Next Button Click
-  nextBtn.addEventListener("click", () => {
-    const maxIndex = getMaxIndex();
-    if (currentIndex < maxIndex) {
-      currentIndex++;
-      updateSlider();
+// -----------------------------New Page Further----------------------------------------------------
+function goToDetails(index) {
+    window.location.href = `details.html?id=${index}`;
+}
+
+// ================== GOOGLE SIGN IN & DYNAMIC REDIRECTION ==================
+function getGoogleAuthUrl() {
+    let currentPath = window.location.pathname;
+    if (!currentPath || currentPath === "/") {
+        currentPath = "/FRONTEND/index.html";
     }
-  });
+    return `http://localhost:5051/api/auth/google?state=${encodeURIComponent(currentPath)}`;
+}
 
-  // Previous Button Click
-  prevBtn.addEventListener("click", () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateSlider();
+const googleLoginBtn = document.getElementById("googleLoginBtn");
+const googleSignupBtn = document.getElementById("googleSignupBtn");
+
+if (googleLoginBtn) {
+    googleLoginBtn.addEventListener("click", () => {
+        window.location.href = getGoogleAuthUrl();
+    });
+}
+
+if (googleSignupBtn) {
+    googleSignupBtn.addEventListener("click", () => {
+        window.location.href = getGoogleAuthUrl();
+    });
+}
+
+// ================= UNIFIED SESSION INITIALIZATION =================
+window.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const userDataString = urlParams.get('user');
+
+    let currentUser = null;
+
+    if (userDataString) {
+        try {
+            currentUser = JSON.parse(decodeURIComponent(userDataString));
+            localStorage.setItem("user", JSON.stringify(currentUser));
+            if (token) localStorage.setItem("token", token);
+        } catch (e) {
+            console.error("Error parsing Google redirect user data:", e);
+        }
+    } else {
+        currentUser = JSON.parse(localStorage.getItem("user"));
     }
-  });
 
-  // Keep slider positioning accurate if the user resizes their screen
-  window.addEventListener("resize", updateSlider);
-  
-  // Initialize button states on load
-  updateSlider();
+    if (currentUser) {
+        const loginBox = document.getElementById("loginBox");
+        const signupBox = document.getElementById("signupBox");
+        const userBox = document.getElementById("userBox");
+        const welcomeUser = document.getElementById("welcomeUser");
+        const userPic = document.getElementById("userPic");
+
+        if (loginBox) loginBox.classList.add("hidden");
+        if (signupBox) signupBox.classList.add("hidden");
+        if (userBox) userBox.classList.remove("hidden");
+
+        if (currentUser.name && welcomeUser) {
+            const firstName = currentUser.name.trim().split(" ")[0];
+            welcomeUser.textContent = `Hi, ${firstName}`;
+        }
+
+        if (currentUser.picture && userPic) {
+            userPic.src = currentUser.picture;
+        }
+    }
 });

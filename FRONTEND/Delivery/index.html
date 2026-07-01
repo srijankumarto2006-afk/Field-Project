@@ -39,7 +39,7 @@
 
          <div class="user-profile hidden" id="userBox">
 
-    <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A" alt="User" class="user-icon">
+    <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A" alt="User" class="user-icon"id="userPic">
 
     <span id="welcomeUser"></span>
 
@@ -791,10 +791,10 @@
       
        
 <div class="divide">
-        <button class="google-btn" onclick="googleLogin()">
-    <img src="https://img.icons8.com/color/48/google-logo.png" width="20">  
-    <p class="empara">Sign in with Google</p>
-</button>
+    <button class="google-btn" id="googleLoginBtn">
+        <img src="https://img.icons8.com/color/48/google-logo.png" width="20">  
+        <p class="empara">Sign in with Google</p>
+    </button>
 </div>
 
         <p class="signup">
@@ -835,11 +835,10 @@
 
         <div class="divider">or</div>
 
-        <button class="google-btn" onclick="googleLogin()">
+<button class="google-btn" id="googleSignupBtn">
     <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" width="20px">
     Sign in with Google
 </button>
-
         <div class="login-text">
             Already have an account? <span onclick="openLogin()" id="newlogin">Log in</span>
         </div>
@@ -851,6 +850,7 @@
 </div>
   <script src="../auth.js"></script>
     <script src="./script.js"></script>
+   
     
 </body>
 </html>

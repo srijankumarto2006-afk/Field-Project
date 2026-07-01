@@ -1959,13 +1959,15 @@ document.addEventListener("click", function () {
 });
 document.getElementById("logoutBtn").addEventListener("click", logout);
 
-function logout(){
-
+function logout() {
+    // 1. Clear out storage mechanisms
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    sessionStorage.clear();
 
-    location.reload();
-
+    // 2. Clear out the URL parameters so Google doesn't log you back in!
+    // This reloads the page with a clean, parameter-free address bar.
+    window.location.href = window.location.origin + window.location.pathname;
 }
   const checkbox = document.getElementById("agreeTerms");
 const createBtn = document.getElementById("createBtn");
@@ -2073,10 +2075,63 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// -----------------------------New Page Further----------------------------------------------------
 
-// -----------------------------New Page Furthur----------------------------------------------------
-
-  function goToDetails(index) {
+function goToDetails(index) {
     // Redirects to details.html while attaching the array index position (?id=0, ?id=1, etc.)
     window.location.href = `details.html?id=${index}`;
 }
+
+// ==================Google sign in=====================
+// ================= GOOGLE LOGIN =================
+
+document.getElementById("googleLoginBtn").addEventListener("click", () => {
+    window.location.href = "http://localhost:5051/api/auth/google";
+});
+
+document.getElementById("googleSignupBtn").addEventListener("click", () => {
+    window.location.href = "http://localhost:5051/api/auth/google";
+});
+
+// ================= UNIFIED SESSION INITIALIZATION =================
+
+window.addEventListener("DOMContentLoaded", () => {
+    // 1. Check for Google OAuth redirect parameters first
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const userDataString = urlParams.get('user');
+
+    let currentUser = null;
+
+    if (userDataString) {
+        try {
+            currentUser = JSON.parse(decodeURIComponent(userDataString));
+            // Save Google session info to localStorage so it stays persistent!
+            localStorage.setItem("user", JSON.stringify(currentUser));
+            if (token) localStorage.setItem("token", token);
+        } catch (e) {
+            console.error("Error parsing Google redirect user data:", e);
+        }
+    } else {
+        // 2. If not a Google redirect, check if a standard email/password session exists
+        currentUser = JSON.parse(localStorage.getItem("user"));
+    }
+
+    // 3. Render Profile UI if any valid user session was found
+    if (currentUser) {
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("signupBox").classList.add("hidden");
+        document.getElementById("userBox").classList.remove("hidden");
+
+        // ✅ THE FIX: Split the name by spaces and grab the first element, adding "Hi " before it
+        if (currentUser.name) {
+            const firstName = currentUser.name.trim().split(" ")[0];
+            document.getElementById("welcomeUser").textContent = `Hi, ${firstName}`;
+        }
+
+        // Set Google Profile Picture Avatar 📸 or fallback
+        if (currentUser.picture) {
+            document.getElementById("userPic").src = currentUser.picture;
+        }
+    }
+});
